@@ -116,8 +116,6 @@ class Queue {
         for (Patient patient : q) {
             output.append(patient.toString()).append("\n");
         }
-        return "Queue{" +
-                "q=\n" + output +
-                "\n";
+        return new StringBuilder().append("Queue{").append("q=\n").append(output).append("\n").toString();
     }
 }
