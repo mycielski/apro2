@@ -6,7 +6,7 @@ public class zad2 {
 
     static Queue queue = new Queue();
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Patient pacjent = new Patient("Tomasz", "Mycielski", "złamana ręka", 2);
         Patient pacjent2 = new Patient("Antoni", "Adamowicz", "bolą plecy", 4);
         Patient pacjent3 = new Patient("Bartosz", "Bartniczuk", "nadwichnięcie kręgu szyjnego", 1);
@@ -93,17 +93,17 @@ class Patient {
 }
 
 class Queue {
-    private LinkedList<Patient> q = new LinkedList<>();
+    private final LinkedList<Patient> q = new LinkedList<>();
 
-    public void addPatient(Patient patient){
+    public void addPatient(Patient patient) {
         if (patient.getPriority() == 4 || q.size() == 0 || q.getLast().getPriority() < patient.getPriority()) {
             q.addLast(patient);
-        } else if (q.getFirst().getPriority() > patient.getPriority()){
+        } else if (q.getFirst().getPriority() > patient.getPriority()) {
             q.addFirst(patient);
         } else {
-            for (int i = 0; i < q.size(); i++){
-                if (q.get(i).getPriority() <= patient.getPriority() && patient.getPriority() < q.get(i+1).getPriority()) {
-                    q.add(i+1, patient);
+            for (int i = 0; i < q.size(); i++) {
+                if (q.get(i).getPriority() <= patient.getPriority() && patient.getPriority() < q.get(i + 1).getPriority()) {
+                    q.add(i + 1, patient);
                     break;
                 }
             }
@@ -113,7 +113,7 @@ class Queue {
     @Override
     public String toString() {
         String output = "";
-        for (Patient patient : q){
+        for (Patient patient : q) {
             output += patient.toString() + "\n";
         }
         return "Queue{" +
