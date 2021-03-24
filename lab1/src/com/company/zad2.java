@@ -93,7 +93,7 @@ class Patient {
 }
 
 class Queue {
-    private final LinkedList<Patient> q = new LinkedList<>();
+    private final LinkedList<Patient> q = new LinkedList<Patient>();
 
     public void addPatient(Patient patient) {
         if (patient.getPriority() == 4 || q.size() == 0 || q.getLast().getPriority() < patient.getPriority()) {
