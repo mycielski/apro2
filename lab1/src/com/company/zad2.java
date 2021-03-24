@@ -3,6 +3,34 @@ package com.company;
 import java.util.LinkedList;
 
 public class zad2 {
+
+    static Queue queue = new Queue();
+
+    public static void main(String[] args){
+        Patient pacjent = new Patient("Tomasz", "Mycielski", "złamana ręka", 2);
+        Patient pacjent2 = new Patient("Antoni", "Adamowicz", "bolą plecy", 4);
+        Patient pacjent3 = new Patient("Bartosz", "Bartniczuk", "nadwichnięcie kręgu szyjnego", 1);
+        Patient pacjent4 = new Patient("Cezary", "Ciszewski", "COVID-19", 3);
+        Patient pacjent5 = new Patient("Danuta", "Daniluk", "COVID-20", 1);
+        Patient pacjent6 = new Patient("Edmund", "Etterbeek", "Sars-Cov 3", 4);
+        Patient pacjent7 = new Patient("Filip", "Fijałkowski", "Poparzenia drugiego stopnia", 2);
+
+        queue.addPatient(pacjent6);
+
+        queue.addPatient(pacjent5);
+
+        queue.addPatient(pacjent);
+
+        queue.addPatient(pacjent7);
+
+        queue.addPatient(pacjent4);
+
+        queue.addPatient(pacjent3);
+
+        queue.addPatient(pacjent2);
+
+        System.out.println(queue);
+    }
 }
 
 class Patient {
@@ -28,7 +56,7 @@ class Patient {
 
     @Override
     public String toString() {
-        return "patient{}";
+        return "Pacjent: " + this.name + " " + this.surname + ", Dolegliwość " + this.illness + ", Priorytet : " + this.priority;
     }
 
     public String getName() {
@@ -64,10 +92,32 @@ class Patient {
     }
 }
 
-class queue {
+class Queue {
     private LinkedList<Patient> q = new LinkedList<>();
 
     public void addPatient(Patient patient){
+        if (patient.getPriority() == 4 || q.size() == 0 || q.getLast().getPriority() < patient.getPriority()) {
+            q.addLast(patient);
+        } else if (q.getFirst().getPriority() > patient.getPriority()){
+            q.addFirst(patient);
+        } else {
+            for (int i = 0; i < q.size(); i++){
+                if (q.get(i).getPriority() <= patient.getPriority() && patient.getPriority() < q.get(i+1).getPriority()) {
+                    q.add(i+1, patient);
+                    break;
+                }
+            }
+        }
+    }
 
+    @Override
+    public String toString() {
+        String output = "";
+        for (Patient patient : q){
+            output += patient.toString() + "\n";
+        }
+        return "Queue{" +
+                "q=\n" + output +
+                "\n";
     }
 }
