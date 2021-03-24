@@ -93,7 +93,7 @@ class Patient {
 }
 
 class Queue {
-    private final LinkedList<Patient> q = new LinkedList<Patient>();
+    private final LinkedList<Patient> q = new LinkedList<>();
 
     public void addPatient(Patient patient) {
         if (patient.getPriority() == 4 || q.size() == 0 || q.getLast().getPriority() < patient.getPriority()) {
@@ -112,9 +112,9 @@ class Queue {
 
     @Override
     public String toString() {
-        String output = "";
+        StringBuilder output = new StringBuilder();
         for (Patient patient : q) {
-            output += patient.toString() + "\n";
+            output.append(patient.toString()).append("\n");
         }
         return "Queue{" +
                 "q=\n" + output +
