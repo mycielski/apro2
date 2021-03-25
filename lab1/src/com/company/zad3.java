@@ -2,6 +2,7 @@ package com.company;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.NoSuchElementException;
 
 public class zad3 {
 
@@ -57,13 +58,17 @@ class Numbers {
     }
 
     public void removeMedianNumber() {
-        if (even) {
-            minHeap.remove(Collections.min(minHeap));
-            maxHeap.remove(Collections.max(maxHeap));
-            median = Collections.min(minHeap) / 2 + Collections.max(maxHeap) / 2;
-        } else {
-            median = Collections.min(minHeap) / 2 + Collections.max(maxHeap) / 2;
+        try {
+            if (even) {
+                minHeap.remove(Collections.min(minHeap));
+                maxHeap.remove(Collections.max(maxHeap));
+                median = Collections.min(minHeap) / 2 + Collections.max(maxHeap) / 2;
+            } else {
+                median = Collections.min(minHeap) / 2 + Collections.max(maxHeap) / 2;
+            }
+            even = !even;
+        } catch (NoSuchElementException e){
+            System.out.println("There are no more numbers to remove.");
         }
-        even = !even;
     }
 }
