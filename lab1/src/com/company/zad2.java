@@ -122,6 +122,10 @@ class Queue {
         }
     }
 
+    public int getSize(){
+        return q.size();
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
