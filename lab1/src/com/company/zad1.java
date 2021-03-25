@@ -25,8 +25,8 @@ public class zad1 {
             matcher = pattern.matcher(line);
             while (matcher.find()) {
                 String string = matcher.group(1).replaceAll("\\/", "");
-                if (!(string.contains(properties.getProperty("e1")) || string.contains(properties.getProperty("e2")) || string.contains(properties.getProperty("e3")))) continue;
-                if (stack.size()==0 || !matcher.group(1).equals("/" + stack.peek())) {
+                if (!(string.contains(properties.getProperty("e1")) || string.contains(properties.getProperty("e2")) || string.contains(properties.getProperty("e3")))) {
+                } else if (stack.size()==0 || !matcher.group(1).equals("/" + stack.peek())) {
                     stack.push(matcher.group(1));
                 } else if (matcher.group(1).equals("/" + stack.peek())) {
                     stack.pop();

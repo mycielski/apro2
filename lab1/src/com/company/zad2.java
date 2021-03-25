@@ -33,7 +33,7 @@ public class zad2 {
     }
 }
 
-class Patient {
+class Patient implements Comparable<Patient> {
     private String name, surname, illness;
     private int priority;
 
@@ -90,10 +90,22 @@ class Patient {
     public void setPriority(int priority) {
         this.priority = priority;
     }
+
+
+    @Override
+    public int compareTo(Patient o) {
+        return o.getPriority()-getPriority();
+    }
 }
 
 class Queue {
     private final LinkedList<Patient> q = new LinkedList<>();
+
+    public Patient getFirst(){
+        Patient patient = q.getFirst();
+        q.removeFirst();
+        return patient;
+    }
 
     public void addPatient(Patient patient) {
         if (patient.getPriority() == 4 || q.size() == 0 || q.getLast().getPriority() < patient.getPriority()) {
@@ -102,7 +114,7 @@ class Queue {
             q.addFirst(patient);
         } else {
             for (int i = 0; i < q.size(); i++) {
-                if (q.get(i).getPriority() <= patient.getPriority() && patient.getPriority() < q.get(i + 1).getPriority()) {
+                if (q.get(i).compareTo(patient) >= 0 && q.get(i+1).compareTo(patient) < 0) { //(q.get(i).getPriority() <= patient.getPriority() && patient.getPriority() < q.get(i + 1).getPriority()) {
                     q.add(i + 1, patient);
                     break;
                 }
