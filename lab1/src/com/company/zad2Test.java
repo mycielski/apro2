@@ -1,16 +1,18 @@
 package com.company;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class zad2Test {
 
-    Queue queue = new Queue();
+    static Queue queue = new Queue();
 
-    @BeforeEach
-    public void setUp() throws Exception{
+    @BeforeAll
+    static void setUp() throws Exception {
         Patient pacjent = new Patient("Tomasz", "Mycielski", "złamana ręka", 2);
         Patient pacjent2 = new Patient("Antoni", "Adamowicz", "bolą plecy", 4);
         Patient pacjent3 = new Patient("Bartosz", "Bartniczuk", "nadwichnięcie kręgu szyjnego", 1);
@@ -28,11 +30,17 @@ class zad2Test {
     }
 
     @Test
-    public void testAdditionToQueue(){
+    public void testAdditionToQueue() {
         Patient pacjent0 = new Patient("Tadeusz", "Tarkowski", "schizofrenia", 4);
+        int expected = queue.getSize() + 1;
         queue.addPatient(pacjent0);
-        assertEquals(8, queue.getSize());
+        assertEquals(expected, queue.getSize());
     }
 
+    @RepeatedTest(4)
+    public void testPrioritiesOrderInQueue() {
+        System.out.println(queue);
+        assertTrue(queue.getFirst().compareTo(queue.getFirst()) >= 0);
+    }
 
 }
