@@ -12,7 +12,7 @@ class zad2Test {
     static Queue queue = new Queue();
 
     @BeforeAll
-    static void setUp() throws Exception {
+    static void setUp() {
         Patient pacjent = new Patient("Tomasz", "Mycielski", "złamana ręka", 2);
         Patient pacjent2 = new Patient("Antoni", "Adamowicz", "bolą plecy", 4);
         Patient pacjent3 = new Patient("Bartosz", "Bartniczuk", "nadwichnięcie kręgu szyjnego", 1);
