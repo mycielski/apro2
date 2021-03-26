@@ -7,9 +7,10 @@ public class zad1 {
     public static void main(String[] args) {
         int[] randomArrayHS = generateRandomIntArray(100,1,100);
         int[] randomArrayMS = randomArrayHS;
-        HeapSort hs = new HeapSort(randomArrayHS);
-        Arrays.stream(hs.getArray()).forEach(System.out::println);
-
+        HeapSort randomHS = new HeapSort(randomArrayHS);
+        Arrays.stream(randomHS.getArray()).forEach(System.out::println);
+        MergeSort randomMS = new MergeSort(randomArrayMS);
+        Arrays.stream(randomMS.getArray()).forEach(System.out::println);
     }
 
     public static int[] generateRandomIntArray(int size, int min, int max){
@@ -39,7 +40,56 @@ public class zad1 {
 }
 
 class MergeSort{
+    private int[] array;
 
+    public MergeSort(int[] a) {
+        array = a;
+        sort(array, 0, array.length-1);
+    }
+
+    private void sort(int a[], int l, int r) {
+        if (l < r){
+            int m = l + (r-l) / 2;
+            sort (a, l, m);
+            sort(a, m+1, r);
+            merge (a,l,m,r);
+        }
+    }
+
+    private void merge(int a[], int l, int m, int r){
+        int n1 = m - l + 1;
+        int n2 = r - m;
+
+        int left[] = new int [n1];
+        int right[] = new int [n2];
+
+        for (int i = 0; i < n1; ++i){
+            left[i] = a[l+i];
+        }
+        for (int i = 0; i < n2; ++i){
+            right[i] = a[m+i+1];
+        }
+
+        int i=0, j=0;
+
+        int k = l;
+
+        while (i < n1 && j < n2) {
+            if (left[i] <= right[j]) {
+                a[k] = left[i];
+                i++;
+            }
+            else {
+                a[k] = right[j];
+                j++;
+            }
+            k++;
+        }
+    }
+
+    public int[] getArray() {
+        return array;
+    }
 }
 
 class HeapSort {
