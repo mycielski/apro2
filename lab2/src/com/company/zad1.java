@@ -1,12 +1,10 @@
 package com.company;
 
-import java.util.Arrays;
-
 public class zad1 {
 
     public static void main(String[] args) {
         System.out.println();
-        int[] randomArrayHS = generateRandomIntArray(100,1,100);
+        int[] randomArrayHS = generateRandomIntArray(100, 1, 100);
         int[] randomArrayMS = randomArrayHS;
         HeapSort randomHS = new HeapSort(randomArrayHS);
         System.out.println("Random heap sort: \n substitutions: " + randomHS.getSubstitutions() + " \n comparisons: " + randomHS.getComparisons());
@@ -35,76 +33,76 @@ public class zad1 {
         System.out.println();
     }
 
-    public static int[] generateRandomIntArray(int size, int min, int max){
+    public static int[] generateRandomIntArray(int size, int min, int max) {
         int[] output = new int[size];
-        for (int i = 0; i < size; i++){
-            output[i] = (int) (Math.random() * (max-min) + min);
+        for (int i = 0; i < size; i++) {
+            output[i] = (int) (Math.random() * (max - min) + min);
         }
         return output;
     }
 
-    public static int[] generatePartiallySortedIntArray(int size, int min, int max){
+    public static int[] generatePartiallySortedIntArray(int size, int min, int max) {
         int[] output = new int[size];
-        for (int i = size/2; i < size; i++){
-            output[i] = (int) (Math.random() * (max-min) + min);
+        for (int i = size / 2; i < size; i++) {
+            output[i] = (int) (Math.random() * (max - min) + min);
         }
-        for (int i = 0; i < size/2; i++){
-            output[i] = i+1;
+        for (int i = 0; i < size / 2; i++) {
+            output[i] = i + 1;
         }
         return output;
     }
 
-    public static int[] generateSortedIntArray(int size){
+    public static int[] generateSortedIntArray(int size) {
         int[] output = new int[size];
         for (int i = 0; i < size; i++) output[i] = i;
         return output;
     }
 }
 
-class MergeSort{
+class MergeSort {
     private int comparisons, substitutions;
 
-    private int[] array;
+    private final int[] array;
 
     public MergeSort(int[] a) {
-        this.substitutions=0;
-        this.comparisons=0;
+        this.substitutions = 0;
+        this.comparisons = 0;
         array = a;
-        sort(array, 0, array.length-1);
+        sort(array, 0, array.length - 1);
     }
 
-    private void sort(int a[], int l, int r) {
-        if (l < r){
+    private void sort(int[] a, int l, int r) {
+        if (l < r) {
             comparisons++;
-            int m = l + (r-l) / 2;
+            int m = l + (r - l) / 2;
             substitutions++;
-            sort (a, l, m);
-            sort(a, m+1, r);
-            merge (a,l,m,r);
+            sort(a, l, m);
+            sort(a, m + 1, r);
+            merge(a, l, m, r);
         }
     }
 
-    private void merge(int a[], int l, int m, int r){
+    private void merge(int[] a, int l, int m, int r) {
         int n1 = m - l + 1;
         int n2 = r - m;
         substitutions++;
         substitutions++;
 
-        int left[] = new int [n1];
-        int right[] = new int [n2];
+        int[] left = new int[n1];
+        int[] right = new int[n2];
         substitutions++;
         substitutions++;
 
-        for (int i = 0; i < n1; ++i){
-            left[i] = a[l+i];
+        for (int i = 0; i < n1; ++i) {
+            left[i] = a[l + i];
             substitutions++;
         }
-        for (int i = 0; i < n2; ++i){
-            right[i] = a[m+i+1];
+        for (int i = 0; i < n2; ++i) {
+            right[i] = a[m + i + 1];
             substitutions++;
         }
 
-        int i=0, j=0;
+        int i = 0, j = 0;
         substitutions++;
         substitutions++;
 
@@ -119,8 +117,7 @@ class MergeSort{
                 a[k] = left[i];
                 substitutions++;
                 i++;
-            }
-            else {
+            } else {
                 a[k] = right[j];
                 substitutions++;
                 j++;
@@ -144,44 +141,43 @@ class MergeSort{
 
 class HeapSort {
 
-    private int comparisons=0, substitutions=0;
-
     private final int[] array;
+    private int comparisons = 0, substitutions = 0;
 
     public HeapSort(int[] a) {
         array = a;
         sort(array);
     }
 
-    private void sort(int[] a){
+    private void sort(int[] a) {
         int n = a.length;
         substitutions++;
-        for (int i = n/2 - 1; i>=0; i--){
-            heap(a, n ,i);
+        for (int i = n / 2 - 1; i >= 0; i--) {
+            heap(a, n, i);
         }
-        for (int i = n - 1; i>0; i--){
+        for (int i = n - 1; i > 0; i--) {
             int temp = a[0];
             a[0] = a[i];
             a[i] = temp;
             substitutions++;
             substitutions++;
             substitutions++;
-            heap(a,i,0);
+            heap(a, i, 0);
         }
     }
 
-    private void heap(int[] a, int n, int i){
+    private void heap(int[] a, int n, int i) {
         int largest = i;
-        int l = 2 *i+1;
-        int r = 2*i+2;
+        int l = 2 * i + 1;
+        int r = 2 * i + 2;
 
-        if (l < n && a[l]> a[largest]){
+        if (l < n && a[l] > a[largest]) {
             comparisons++;
             comparisons++;
             largest = l;
             substitutions++;
         }
-        if (r < n && a[r] > a[largest]){
+        if (r < n && a[r] > a[largest]) {
             comparisons++;
             comparisons++;
             largest = r;
@@ -195,7 +191,7 @@ class HeapSort {
             substitutions++;
             substitutions++;
             substitutions++;
-            heap(a,n,largest);
+            heap(a, n, largest);
         }
     }
 
