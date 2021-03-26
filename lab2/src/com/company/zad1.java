@@ -32,7 +32,7 @@ public class zad1 {
         MergeSort sortedMS = new MergeSort(sortedIntArrayMS);
         System.out.println("Sorted merge sort: \n substitutions: " + sortedMS.getSubstitutions() + " \n comparisons: " + sortedMS.getComparisons());
         //Arrays.stream(sortedMS.getArray()).forEach(System.out::println);
-
+        System.out.println();
     }
 
     public static int[] generateRandomIntArray(int size, int min, int max){
