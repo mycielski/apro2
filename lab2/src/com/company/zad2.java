@@ -11,7 +11,7 @@ public class zad2 {
     }
 }
 
-class BinaryTree {
+class BinaryTree implements Iterable{
 
     private Node root;
 
@@ -22,6 +22,11 @@ class BinaryTree {
     public void addNode(Object o){
         Node newNode = new Node(o);
 
+    }
+
+    @Override
+    public Iterator iterator() {
+        return null;
     }
 
     class TreeIterator implements Iterator{
