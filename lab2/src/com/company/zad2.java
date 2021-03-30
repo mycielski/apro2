@@ -7,12 +7,17 @@ import java.util.Queue;
 public class zad2 {
 
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree("First");
+        System.out.println("\nZerowe");
+        BinaryTree tree = new BinaryTree("\nFirst");
+        System.out.println("\nPierwsze");
+        tree.addNode("1");
+        System.out.println("\nDrugie:");
         tree.addNode("Second");
+        System.out.println("\nTrzecie");
         tree.addNode(3);
         tree.addNode('Q');
-
-        for (Object leaf : tree) System.out.println(leaf);
+        tree.addNode('V');
+        tree.addNode("VI");
     }
 }
 
@@ -32,13 +37,12 @@ class BinaryTree implements Iterable {
             Node current = iterator().next();
             if (!current.hasLeftChild()) {
                 current.setLeftChild(newNode);
-                break;
+                return;
             } else if( !current.hasRightChild()){
                 current.setRightChild(newNode);
-                break;
+                return;
             }
         }
-        iterator.next().setLeftChild(newNode);
     }
 
     @Override
@@ -53,14 +57,24 @@ class BinaryTree implements Iterable {
             @Override
             public Node next() {
                 if (q.peek() != null) {
-                    if (q.peek().hasLeftChild) q.add(q.peek().getLeftChild());
-                    if (q.peek().hasRightChild) q.add(q.peek().getRightChild());
-                    return q.remove();
+                    if (q.peek().hasLeftChild()) q.add(q.peek().getLeftChild());
+                    if (q.peek().hasRightChild()) q.add(q.peek().getRightChild());
+                    System.out.println("KOLEJKA: " + q);
+                    return q.poll();
                 }
+                q.clear();
                 return null;
             }
         };
         return it;
+    }
+
+    public Queue getQueue(){
+        return q;
+    }
+
+    public int getQueueSize(){
+        return q.size();
     }
 
     class Node {
@@ -106,9 +120,10 @@ class BinaryTree implements Iterable {
 
         @Override
         public String toString() {
-            return "Node{" +
-                    "value=" + value +
-                    '}';
+            StringBuilder sb = new StringBuilder().append("Node{").append("value=").append(value);
+            if (hasLeftChild()) sb.append(", ").append("leftChildValue=").append(getLeftChild().getValue());
+            if (hasRightChild()) sb.append(", ").append("rightChildValue=").append(getRightChild().getValue());
+            return sb.append('}').toString();
         }
     }
 }
