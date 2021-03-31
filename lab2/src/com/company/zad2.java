@@ -1,19 +1,19 @@
 package com.company;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class zad2 {
 
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree("\nFirst");
-        tree.addNode(2);
-        tree.addNode(3);
-        tree.addNode(4);
-        tree.addNode(5);
-        tree.addNode(6);
-        tree.addNode(7);
+        BinaryTree tree = new BinaryTree(1);
+        tree.degenerateAddNode(2);
+        tree.degenerateAddNode(3);
+        tree.degenerateAddNode(4);
+        tree.degenerateAddNode(5);
+        tree.degenerateAddNode(6);
+        tree.degenerateAddNode(7);
+        tree.degenerateAddNode(8);
+        List<Integer> list = new ArrayList<>();
         for (Object leaf : tree) System.out.println(leaf);
 
     }
@@ -22,6 +22,7 @@ public class zad2 {
 class BinaryTree implements Iterable {
 
     private Node root = null;
+    private boolean degenerationBalancer = true;
 
     public BinaryTree(Object rootNodeValue) {
         this.root = new Node(rootNodeValue);
@@ -41,6 +42,23 @@ class BinaryTree implements Iterable {
                 return;
             }
         }
+    }
+
+    public void degenerateAddNode(Object newNodeValue){
+        Node newNode = new Node(newNodeValue);
+        Node current = root;
+        if (degenerationBalancer){
+            while (current.hasLeftChild()) {
+                current = current.getLeftChild();
+            }
+            current.setLeftChild(newNode);
+        } else {
+            while (current.hasRightChild()) {
+                current=current.getRightChild();
+            }
+            current.setRightChild(newNode);
+        }
+        degenerationBalancer = !degenerationBalancer;
     }
 
     @Override
@@ -70,7 +88,7 @@ class BinaryTree implements Iterable {
         }
     }
 
-    private class Node {
+    protected class Node {
 
         private final Object value;
         private Node leftChild = null, rightChild = null;
