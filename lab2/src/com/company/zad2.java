@@ -19,7 +19,7 @@ public class zad2 {
         tree.addNode(7);
         tree.addNode(8);
         System.out.println("SORTED:");
-        for (Object value : tree.getSortedValues()) System.out.println(value);
+        for (Object value : tree.getSortedValuesList()) System.out.println(value);
         System.out.println("NOT SORTED:");
         for (Object leaf : tree) System.out.println(leaf);
 
@@ -33,7 +33,7 @@ public class zad2 {
         degenerateTree.degenerateAddNode(7);
         degenerateTree.degenerateAddNode(1);
         System.out.println("SORTED:");
-        for (Object value : degenerateTree.getSortedValues()) System.out.println(value);
+        for (Object value : degenerateTree.getSortedValuesList()) System.out.println(value);
         System.out.println("NOT SORTED:");
         for (Object leaf : degenerateTree) System.out.println(leaf);
 
@@ -49,11 +49,16 @@ class BinaryTree implements Iterable {
         this.root = new Node(rootNodeValue);
     }
 
-    public LinkedList getSortedValues() {
+    public LinkedList getSortedValuesList() {
         LinkedList list = new LinkedList();
         TreeIterator ti = new TreeIterator(root);
         while (ti.hasNext()) list.add(ti.next());
         return (LinkedList) list.stream().sorted(Comparator.comparing(Node::hashCode)).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public Integer getNodeValue(Object object) {
+        Node node = (Node) object;
+        return (Integer) node.getValue();
     }
 
     public void addNode(Object newNodeValue) {
