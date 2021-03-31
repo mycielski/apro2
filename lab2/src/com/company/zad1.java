@@ -60,9 +60,8 @@ public class zad1 {
 }
 
 class MergeSort {
-    private int comparisons, substitutions;
-
     private final int[] array;
+    private int comparisons, substitutions;
 
     public MergeSort(int[] a) {
         this.substitutions = 0;

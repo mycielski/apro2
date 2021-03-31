@@ -1,6 +1,9 @@
 package com.company;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.stream.Collectors;
 
 public class zad2 {
@@ -46,7 +49,7 @@ class BinaryTree implements Iterable {
         this.root = new Node(rootNodeValue);
     }
 
-    public LinkedList getSortedValues(){
+    public LinkedList getSortedValues() {
         LinkedList list = new LinkedList();
         TreeIterator ti = new TreeIterator(root);
         while (ti.hasNext()) list.add(ti.next());
@@ -69,17 +72,17 @@ class BinaryTree implements Iterable {
         }
     }
 
-    public void degenerateAddNode(Object newNodeValue){
+    public void degenerateAddNode(Object newNodeValue) {
         Node newNode = new Node(newNodeValue);
         Node current = root;
-        if (degenerationBalancer){
+        if (degenerationBalancer) {
             while (current.hasLeftChild()) {
                 current = current.getLeftChild();
             }
             current.setLeftChild(newNode);
         } else {
             while (current.hasRightChild()) {
-                current=current.getRightChild();
+                current = current.getRightChild();
             }
             current.setRightChild(newNode);
         }
