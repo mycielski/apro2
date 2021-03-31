@@ -20,4 +20,20 @@ class BinaryTreeTest {
             assertTrue(tree.getNodeValue(tree.getSortedValuesList().get(i)) > tree.getNodeValue(tree.getSortedValuesList().get(i - 1)));
         }
     }
+
+    @Test
+    void getSortedValuesListFromDegenerateTree() {
+        BinaryTree degenerateTree = new BinaryTree(8);
+        degenerateTree.degenerateAddNode(3);
+        degenerateTree.degenerateAddNode(2);
+        degenerateTree.degenerateAddNode(4);
+        degenerateTree.degenerateAddNode(5);
+        degenerateTree.degenerateAddNode(6);
+        degenerateTree.degenerateAddNode(7);
+        degenerateTree.degenerateAddNode(1);
+        for (int i = 1; i < degenerateTree.getSortedValuesList().size(); i++) {
+            assertTrue(degenerateTree.getNodeValue(degenerateTree.getSortedValuesList().get(i)) > degenerateTree.getNodeValue(degenerateTree.getSortedValuesList().get(i - 1)));
+        }
+    }
+
 }
