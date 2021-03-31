@@ -14,7 +14,7 @@ public class zad2 {
         tree.addNode(5);
         tree.addNode(6);
         tree.addNode(7);
-        for (Object leaf: tree) System.out.println(leaf);
+        for (Object leaf : tree) System.out.println(leaf);
 
     }
 }
@@ -31,13 +31,12 @@ class BinaryTree implements Iterable {
         Node newNode = new Node(newNodeValue);
         TreeIterator ti = new TreeIterator(root);
         Node current;
-        while (ti.hasNext()){
+        while (ti.hasNext()) {
             current = ti.next();
             if (current.hasLeftChild() && !current.hasRightChild()) {
                 current.setRightChild(newNode);
                 return;
-            }
-            else if (!current.hasLeftChild()) {
+            } else if (!current.hasLeftChild()) {
                 current.setLeftChild(newNode);
                 return;
             }
@@ -49,11 +48,11 @@ class BinaryTree implements Iterable {
         return new TreeIterator(root);
     }
 
-    private class TreeIterator implements Iterator{
+    private class TreeIterator implements Iterator {
 
-        private Queue<Node> queue = new LinkedList();
+        private final Queue<Node> queue = new LinkedList();
 
-        public TreeIterator(Node root){
+        public TreeIterator(Node root) {
             queue.add(root);
         }
 
