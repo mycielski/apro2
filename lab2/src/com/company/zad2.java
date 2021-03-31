@@ -7,24 +7,21 @@ import java.util.Queue;
 public class zad2 {
 
     public static void main(String[] args) {
-        System.out.println("\nZerowe");
         BinaryTree tree = new BinaryTree("\nFirst");
-        System.out.println("\nPierwsze");
-        tree.addNode("1");
-        System.out.println("\nDrugie:");
-        tree.addNode("Second");
-        System.out.println("\nTrzecie");
+        tree.addNode(2);
         tree.addNode(3);
-        tree.addNode('Q');
-        tree.addNode('V');
-        tree.addNode("VI");
+        tree.addNode(4);
+        tree.addNode(5);
+        tree.addNode(6);
+        tree.addNode(7);
+        for (Object leaf: tree) System.out.println(leaf);
+
     }
 }
 
 class BinaryTree implements Iterable {
 
     private Node root = null;
-    private final Queue<Node> q = new LinkedList<>();
 
     public BinaryTree(Object rootNodeValue) {
         this.root = new Node(rootNodeValue);
@@ -32,14 +29,16 @@ class BinaryTree implements Iterable {
 
     public void addNode(Object newNodeValue) {
         Node newNode = new Node(newNodeValue);
-        Iterator<Node> iterator = iterator();
-        while (iterator.hasNext()) {
-            Node current = iterator().next();
-            if (!current.hasLeftChild()) {
-                current.setLeftChild(newNode);
-                return;
-            } else if( !current.hasRightChild()){
+        TreeIterator ti = new TreeIterator(root);
+        Node current;
+        while (ti.hasNext()){
+            current = ti.next();
+            if (current.hasLeftChild() && !current.hasRightChild()) {
                 current.setRightChild(newNode);
+                return;
+            }
+            else if (!current.hasLeftChild()) {
+                current.setLeftChild(newNode);
                 return;
             }
         }
@@ -47,37 +46,32 @@ class BinaryTree implements Iterable {
 
     @Override
     public Iterator<Node> iterator() {
-        q.add(root);
-        Iterator<Node> it = new Iterator<Node>() {
-            @Override
-            public boolean hasNext() {
-                return !q.isEmpty();
-            }
-
-            @Override
-            public Node next() {
-                if (q.peek() != null) {
-                    if (q.peek().hasLeftChild()) q.add(q.peek().getLeftChild());
-                    if (q.peek().hasRightChild()) q.add(q.peek().getRightChild());
-                    System.out.println("KOLEJKA: " + q);
-                    return q.poll();
-                }
-                q.clear();
-                return null;
-            }
-        };
-        return it;
+        return new TreeIterator(root);
     }
 
-    public Queue getQueue(){
-        return q;
+    private class TreeIterator implements Iterator{
+
+        private Queue<Node> queue = new LinkedList();
+
+        public TreeIterator(Node root){
+            queue.add(root);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !queue.isEmpty();
+        }
+
+        @Override
+        public Node next() {
+            Node current = queue.poll();
+            if (current.hasLeftChild()) queue.add(current.getLeftChild());
+            if (current.hasRightChild()) queue.add(current.getRightChild());
+            return current;
+        }
     }
 
-    public int getQueueSize(){
-        return q.size();
-    }
-
-    class Node {
+    private class Node {
 
         private final Object value;
         private Node leftChild = null, rightChild = null;
