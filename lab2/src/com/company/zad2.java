@@ -37,6 +37,18 @@ public class zad2 {
         System.out.println("NOT SORTED:");
         for (Object leaf : degenerateTree) System.out.println(leaf);
 
+
+        System.out.println("\n~~IN ORDER BINARY TREE~~");
+        BinaryTree inOrderTree = new BinaryTree(1);
+        inOrderTree.addNode(2);
+        inOrderTree.addNode(3);
+        inOrderTree.addNode(4);
+        inOrderTree.addNode(5);
+        inOrderTree.addNode(6);
+        inOrderTree.addNode(7);
+        inOrderTree.addNode(8);
+
+        System.out.println(inOrderTree);
     }
 }
 
@@ -91,12 +103,22 @@ class BinaryTree implements Iterable {
             }
             current.setRightChild(newNode);
         }
-        degenerationBalancer = !degenerationBalancer;
+        //degenerationBalancer = !degenerationBalancer;
     }
 
     @Override
     public Iterator<Node> iterator() {
         return new TreeIterator(root);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        TreeIterator ti = new TreeIterator(root);
+        while (ti.hasNext()){
+            sb.append(ti.next()).append("\n");
+        }
+        return sb.toString();
     }
 
     private class TreeIterator implements Iterator {
