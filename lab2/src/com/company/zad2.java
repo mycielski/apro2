@@ -121,7 +121,7 @@ class BinaryTree implements Iterable {
         }
     }
 
-    protected class Node {
+    public class Node {
 
         private final Object value;
         private Node leftChild = null, rightChild = null;
