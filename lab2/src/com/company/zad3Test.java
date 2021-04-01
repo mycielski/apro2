@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class zad3Test {
 
-    private static BinaryTree completeTree = new BinaryTree(1);
-    private static BinaryTree incompleteTree = new BinaryTree(1);
+    private static final BinaryTree completeTree = new BinaryTree(1);
+    private static final BinaryTree incompleteTree = new BinaryTree(1);
 
     @BeforeAll
     static void beforeAllTest(){
