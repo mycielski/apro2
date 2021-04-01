@@ -27,6 +27,7 @@ public class zad3 {
         boolean potentiallyIncomplete = false;
         for (Object leaf : tree) {
             current = (Node) leaf;
+            if (current.hasRightChild() && !current.hasLeftChild()) return false;
             if (!potentiallyIncomplete && current.hasLeftChild()) {
                 list.add(current.getLeftChild());
                 if (current.hasRightChild()) {
