@@ -2,84 +2,81 @@ package com.company.zad2;
 
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Graph {
 
     private final int vertices,edges;
-    private final int[][] adjacencyMatrix;
+    private final ArrayList<ArrayList<Integer>> adjacencyList;
 
     /**
      * Initializes the graph based on its number of vertices and edges.
      * @param vertices total number of vertices in this graph
      * @param edges total number of edges in this graph
      */
-    public Graph(int vertices, int edges, int[][] adjacencyMatrix) {
+    public Graph(int vertices, int edges, ArrayList<ArrayList<Integer>> adjacencyList) {
         this.vertices = vertices;
         this.edges = edges;
-        this.adjacencyMatrix = adjacencyMatrix;
+        this.adjacencyList = adjacencyList;
     }
 
     /**
-     * Uses Dijkstra's algorithm to find the shortest path between given vertices
-     * @param sourceVertexIndex index of vertex where we start
+     *  prints out the path between two vertices
+     * @param source index of starting vertex
+     * @param destination index of destination vertex
      */
-    public void dijsktraComputeShortestPath(int sourceVertexIndex, int destinationVertexIndex) {
-        boolean[] shortestPathTree = new boolean[vertices];
+    public void printShortestPathBetweenTwoVertices(int source, int destination){
+        int[] predecessor = new int[vertices];
         int[] distance = new int[vertices];
-        final int INFINITY = Integer.MAX_VALUE;
-        ArrayList<Integer> list = new ArrayList<>();
 
-        // initialize every distance to be infinite
-        for (int i = 0; i < distance.length; i++) distance[i] = INFINITY;
+        if (!BFS(source,destination,predecessor,distance)) {
+            System.out.println("Podane wierzchołki nie są połączone.");
+            return;
+        }
+        LinkedList<Integer> path = new LinkedList<Integer>();
+        int crawl = destination;
+        path.add(crawl);
+        while(predecessor[crawl] != -1){
+            path.add(predecessor[crawl]);
+            crawl = predecessor[crawl];
+        }
 
-        // distance from source vertex to itself is of course 0
-        distance[sourceVertexIndex] = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Integer stop : path){
+            stringBuilder.append(stop).append(" ");
+        }
+        System.out.println(stringBuilder.toString());
 
-        //create shortest path tree
+    }
+
+    private boolean BFS(int source, int destination, int[] predecessor, int[] distance){
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+        boolean[] visited = new boolean[vertices];
+
         for (int i = 0; i < vertices; i++){
+            visited[i] = false;
+            distance[i] = Integer.MAX_VALUE;
+            predecessor[i] = -1;
+        }
 
-            //get the vertex with minimum distance
-            int vertexU = getMinimumDistanceVertex(shortestPathTree,distance);
+        visited[source] = true;
+        distance[source] = 0;
+        queue.add(source);
 
-            // add this vertex to the shortest path tree
-            shortestPathTree[vertexU] = true;
+        while (!queue.isEmpty()){
+            int u = queue.remove();
+            for (int i = 0; i < adjacencyList.get(u).size(); i++){
+                if (!visited[adjacencyList.get(u).get(i)]){
+                    visited[adjacencyList.get(u).get(i)] = true;
+                    distance[adjacencyList.get(u).get(i)] = distance[u] + 1;
+                    predecessor[adjacencyList.get(u).get(i)] = u;
+                    queue.add(adjacencyList.get(u).get(i));
 
-            // iterate through all the adjacent vertices of above vertex and update the keys
-            for (int vertexV = 0; vertexV < vertices; vertexV++){
-                //check if edge between vertexU and vertexV exists
-                if(adjacencyMatrix[vertexU][vertexV] > 0) {
-                    //check if vertexV is already in the shortest path tree and if distance[vertexV]!=Infinity
-                    if(shortestPathTree[vertexV] == false && adjacencyMatrix[vertexU][vertexV] != INFINITY){
-                        //check whether distance needs to be updated
-
-                        int newKey = adjacencyMatrix[vertexU][vertexV] + distance[vertexU];
-                        if (newKey < distance[vertexV]) distance[vertexV] = newKey;
-                    }
+                    // break upon finding destination
+                    if(adjacencyList.get(u).get(i).equals(destination)) return true;
                 }
             }
         }
-        // prints the path
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Start: ").append(sourceVertexIndex);
-
+        return false;
     }
-
-    /**
-     *  get the not yet included in shortest path tree vertex with minimum distance
-     * @param minimumSpanningTree
-     * @param key
-     * @return index of vertex with minimum distance
-     */
-    int getMinimumDistanceVertex(boolean[] minimumSpanningTree, int[] key){
-        int minKey = Integer.MAX_VALUE;
-        int vertex = -1;
-        for (int i = 0; i < vertices; i++){
-            if (minimumSpanningTree[i] == false && minKey>key[i]){
-                minKey = key[i];
-                vertex = i;
-            }
-        }
-        return vertex;
-    }
-
 }
