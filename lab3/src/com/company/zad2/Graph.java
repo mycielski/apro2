@@ -58,24 +58,38 @@ public class Graph {
 
     }*/
     public void printPathBetweenVertices(int source, int destination) {
+        if (source > destination){
+            int tmp = source;
+            source = destination;
+            destination = tmp;
+        }
         boolean[] visited = new boolean[vertices];
         ArrayList<Integer> path = new ArrayList<Integer>();
-        if (DFS(source, destination, visited, path) == -1) System.out.println("Wierzchołki nie są połączone.");
+        if (pathfinder(source, destination, visited, path) == -1) {
+            System.out.println("Wierzchołki nie są połączone.");
+        } else {
+            System.out.println(source);
+        }
     }
 
-    public int DFS(int source, int destination, boolean[] visited, ArrayList<Integer> path) {
+    public int pathfinder(int source, int destination, boolean[] visited, ArrayList<Integer> path) {
         if (!visited[source]) {
             visited[source] = true;
-            path.add(source);
             for (Integer vertex : adjacencyList.get(source)) {
                 if (vertex == destination) {
+                    System.out.print(destination + " ");
                     path.add(destination);
-                    for (Integer step : path) System.out.println(step);
                     return source;
                 }
             }
             for (Integer vertex : adjacencyList.get(source)) {
-                return DFS(vertex, destination, visited, path);
+                int findings =  pathfinder(vertex, destination, visited, path);
+                if (findings == -1) {
+                } else {
+                    System.out.print(findings + " ");
+                    path.add(findings);
+                    return source;
+                }
             }
         }
         return -1;

@@ -77,6 +77,7 @@ public class Main {
             while (line != null) {
                 // if first char of line is a # ignores the line
                 if (line.charAt(0) == '#') {
+                    line = reader.readLine();
                     continue;
                 } else {
                     // splits the line at space character and parses the parts of the line to integer, then updates
