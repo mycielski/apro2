@@ -10,8 +10,8 @@ public class Main {
     public static void main(String[] args) {
         // write your code here
         Graph graph = generateGraphFromFile("moj_graf.txt");
-        System.out.println(graph.countDisjointedSubgraphs());
-        //graph.printShortestPathBetweenTwoVertices(1,2);
+        //System.out.println(graph.countDisjointedSubgraphs());
+        graph.printShortestPathBetweenTwoVertices(0,3);
     }
 
     /**

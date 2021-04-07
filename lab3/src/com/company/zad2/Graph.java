@@ -23,19 +23,19 @@ public class Graph {
 
     /**
      *  prints out the path between two vertices
-     * @param source index of starting vertex
      * @param destination index of destination vertex
+     * @param source index of source vertex
      */
-    public void printShortestPathBetweenTwoVertices(int source, int destination){
+    public void printShortestPathBetweenTwoVertices(int destination, int source){
         int[] predecessor = new int[vertices];
         int[] distance = new int[vertices];
 
-        if (!BFS(source,destination,predecessor,distance)) {
+        if (!BFS(destination,source,predecessor,distance)) {
             System.out.println("Podane wierzchołki nie są połączone.");
             return;
         }
         LinkedList<Integer> path = new LinkedList<Integer>();
-        int crawl = destination;
+        int crawl = source;
         path.add(crawl);
         while(predecessor[crawl] != -1){
             path.add(predecessor[crawl]);
