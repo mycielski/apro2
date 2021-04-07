@@ -1,5 +1,6 @@
 package com.company.zad1;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -13,7 +14,10 @@ public class Main {
 
     public static int countSubstringAnagrams(String word){
         int count = 0;
+        for (int i = 0; i < word.length()-1; i++) {
+            ArrayList<String> list = new ArrayList<String>();
 
+        }
         return count;
     }
 
