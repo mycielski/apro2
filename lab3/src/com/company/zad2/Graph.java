@@ -63,8 +63,10 @@ public class Graph {
 
     private void DFS(ArrayList<Integer> verticesList, boolean[] visited){
         for (Integer vertex : verticesList){
-            visited[vertex] = true;
-            DFS(adjacencyList.get(vertex), visited);
+            if (!visited[vertex]) {
+                visited[vertex] = true;
+                DFS(adjacencyList.get(vertex), visited);
+            }
         }
     }
 
