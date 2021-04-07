@@ -9,7 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
         // write your code here
-
+        Graph graph = generateGraphFromFile("moj_graf.txt");
+        System.out.println(graph.countDisjointedSubgraphs());
+        //graph.printShortestPathBetweenTwoVertices(1,2);
     }
 
     /**
@@ -34,6 +36,7 @@ public class Main {
             line = reader.readLine();
             edges = Integer.parseInt(line);
             line = reader.readLine();
+            System.out.println("v" + vertices + "e" + edges);
             while (line != null) {
                 // if first char of line is a # ignores the line
                 if (line.charAt(0) == '#') {
@@ -42,18 +45,19 @@ public class Main {
                     // splits the line at space character and parses the parts of the line to integer, then updates
                     // the adjacency list
                     String[] parts = line.split(" ");
-                    int[] adjacentVerticesIndexes = new int[parts.length];
-                    for (int i = 0; i < parts.length; i++) {
-                        adjacentVerticesIndexes[i] = Integer.parseInt(parts[i]);
-                    }
-                    for (int i = 1; i < adjacentVerticesIndexes.length; i++) {
-                        // it's a non-directed graph so we make an edge in both ways
-                        adjacencyList.get(adjacentVerticesIndexes[i]).add(adjacentVerticesIndexes[0]);
-                        adjacencyList.get(adjacentVerticesIndexes[0]).add(adjacentVerticesIndexes[i]);
+                    for (int i = 0; i < parts.length; i++) System.out.print(parts[i]);
+                    for (int i = 1; i < parts.length; i++){
+                        adjacencyList.get(Integer.parseInt(parts[0])).add(Integer.parseInt(parts[i]));
+                        adjacencyList.get(Integer.parseInt(parts[i-1])).add(Integer.parseInt(parts[0]));
                     }
                 }
+                System.out.println();
                 line = reader.readLine();
             }
+            for (ArrayList lista : adjacencyList){
+                //System.out.println(lista);
+            }
+            return new Graph(vertices,edges,adjacencyList);
         } catch (IOException e) {
             e.printStackTrace();
         }

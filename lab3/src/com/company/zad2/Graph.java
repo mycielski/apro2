@@ -3,6 +3,7 @@ package com.company.zad2;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class Graph {
 
@@ -49,25 +50,24 @@ public class Graph {
 
     }
 
-    private int countDisjointedSubgraphs(){
+    public int countDisjointedSubgraphs(){
         boolean[] visited = new boolean[vertices];
         int count = 0;
+        Queue<Integer> queue = new LinkedList<Integer>();
         for (int i = 0; i < vertices; i++) {
             if (!visited[i]){
+                queue.add(i);
+                while(!queue.isEmpty()){
+                    int current = queue.remove();
+                    visited[current] = true;
+                    for(Integer vertex : adjacencyList.get(current)) {
+                        if (!visited[vertex]) queue.add(vertex);
+                    }
+                }
                 count++;
-                DFS(adjacencyList.get(i), visited);
             }
         }
         return count;
-    }
-
-    private void DFS(ArrayList<Integer> verticesList, boolean[] visited){
-        for (Integer vertex : verticesList){
-            if (!visited[vertex]) {
-                visited[vertex] = true;
-                DFS(adjacencyList.get(vertex), visited);
-            }
-        }
     }
 
     private boolean BFS(int source, int destination, int[] predecessor, int[] distance){
