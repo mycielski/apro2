@@ -61,12 +61,11 @@ public class Graph {
         return count;
     }
 
-    private boolean[] DFS(ArrayList<Integer> verticesList, boolean[] visited){
+    private void DFS(ArrayList<Integer> verticesList, boolean[] visited){
         for (Integer vertex : verticesList){
             visited[vertex] = true;
             DFS(adjacencyList.get(vertex), visited);
         }
-        return visited;
     }
 
     private boolean BFS(int source, int destination, int[] predecessor, int[] distance){
