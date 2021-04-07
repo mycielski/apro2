@@ -49,6 +49,26 @@ public class Graph {
 
     }
 
+    private int countDisjointedSubgraphs(){
+        boolean[] visited = new boolean[vertices];
+        int count = 0;
+        for (int i = 0; i < vertices; i++) {
+            if (!visited[i]){
+                count++;
+                DFS(adjacencyList.get(i), visited);
+            }
+        }
+        return count;
+    }
+
+    private boolean[] DFS(ArrayList<Integer> verticesList, boolean[] visited){
+        for (Integer vertex : verticesList){
+            visited[vertex] = true;
+            DFS(adjacencyList.get(vertex), visited);
+        }
+        return visited;
+    }
+
     private boolean BFS(int source, int destination, int[] predecessor, int[] distance){
         LinkedList<Integer> queue = new LinkedList<Integer>();
         boolean[] visited = new boolean[vertices];
