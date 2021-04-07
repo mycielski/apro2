@@ -1,27 +1,37 @@
 package com.company.zad2;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
         // write your code here
-        int choice = 1;
         System.out.println("Podaj ścieżkę do pliku z grafem");
         Scanner scanner = new Scanner(System.in);
         String filepath = scanner.nextLine();
+        if (!new File(filepath).exists()) {
+            System.out.println("Plik nie istnieje.");
+            return;
+        }
         Graph graph = generateGraphFromFile(filepath);
-        while (choice != 0){
+        int choice = 1;
+        while (choice != 0) {
             System.out.println("Wybierz co chcesz zrobić:");
             System.out.println("1 - liczenie spójnych składowych grafu");
             System.out.println("2 - szukanie ścieżki między wierzchołkami grafu");
-            System.out.println("0 - wyjście z programu");
-            choice = scanner.nextInt();
-            switch(choice) {
+            System.out.println("cokolwiek innego - wyjście z programu");
+            try {
+                choice = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                choice = 0;
+            }
+            switch (choice) {
                 case 1:
                     System.out.println(graph.countDisjointedSubgraphs());
                     break;
@@ -29,13 +39,13 @@ public class Main {
                     System.out.println("Podaj indeksy wierzchołków między którymi chcesz wyznaczyć ścieżkę.");
                     int v1 = scanner.nextInt();
                     int v2 = scanner.nextInt();
-                    graph.printPathBetweenVertices(v1,v2);
+                    graph.printPathBetweenVertices(v1, v2);
                     //graph.printShortestPathBetweenTwoVertices(v2,v1);
                     break;
                 case 0:
                     break;
                 default:
-                    System.out.println("Nie rozumiem. Spróbuj ponownie.");
+                    return;
             }
 
         }
@@ -43,6 +53,7 @@ public class Main {
 
     /**
      * Generates a graph from a file
+     *
      * @param pathToFile path to file
      * @return Graph generated from file
      */
@@ -71,14 +82,14 @@ public class Main {
                     // splits the line at space character and parses the parts of the line to integer, then updates
                     // the adjacency list
                     String[] parts = line.split(" ");
-                    for (int i = 1; i < parts.length; i++){
+                    for (int i = 1; i < parts.length; i++) {
                         adjacencyList.get(Integer.parseInt(parts[0])).add(Integer.parseInt(parts[i]));
-                        adjacencyList.get(Integer.parseInt(parts[i-1])).add(Integer.parseInt(parts[0]));
+                        adjacencyList.get(Integer.parseInt(parts[i - 1])).add(Integer.parseInt(parts[0]));
                     }
                 }
                 line = reader.readLine();
             }
-            return new Graph(vertices,edges,adjacencyList);
+            return new Graph(vertices, edges, adjacencyList);
         } catch (IOException e) {
             e.printStackTrace();
         }
