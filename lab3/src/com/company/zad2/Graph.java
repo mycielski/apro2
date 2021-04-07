@@ -28,7 +28,7 @@ public class Graph {
      * @param destination index of destination vertex
      * @param source      index of source vertex
      */
-    public void printShortestPathBetweenTwoVertices(int destination, int source) {
+    /*public void printShortestPathBetweenTwoVertices(int destination, int source) {
         for (Integer v : adjacencyList.get(source)) {
             if (v.equals(destination)) {
                 System.out.println(source + " " + destination);
@@ -56,22 +56,21 @@ public class Graph {
         }
         System.out.println(stringBuilder.toString());
 
-    }
-
+    }*/
     public void printPathBetweenVertices(int source, int destination) {
         boolean[] visited = new boolean[vertices];
         ArrayList<Integer> path = new ArrayList<Integer>();
-        if (DFS(source, destination, visited,path) == -1 ) System.out.println("Wierzchołki nie są połączone.");
+        if (DFS(source, destination, visited, path) == -1) System.out.println("Wierzchołki nie są połączone.");
     }
 
     public int DFS(int source, int destination, boolean[] visited, ArrayList<Integer> path) {
         if (!visited[source]) {
-            visited[source]= true;
+            visited[source] = true;
             path.add(source);
             for (Integer vertex : adjacencyList.get(source)) {
                 if (vertex == destination) {
                     path.add(destination);
-                    for(Integer step : path) System.out.println(step);
+                    for (Integer step : path) System.out.println(step);
                     return source;
                 }
             }
@@ -101,7 +100,7 @@ public class Graph {
         }
         return count;
     }
-
+    /*
     private boolean BFS(int source, int destination, int[] predecessor, int[] distance) {
         LinkedList<Integer> queue = new LinkedList<Integer>();
         boolean[] visited = new boolean[vertices];
@@ -132,4 +131,6 @@ public class Graph {
         }
         return false;
     }
+
+     */
 }
