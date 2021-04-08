@@ -11,10 +11,11 @@ public class Graph {
     private final ArrayList<ArrayList<Integer>> adjacencyList;
 
     /**
-     * Initializes the graph based on its number of vertices and edges.
+     * Initializes the graph based on its number of vertices, edges and its adjacency list.
      *
-     * @param vertices total number of vertices in this graph
-     * @param edges    total number of edges in this graph
+     * @param vertices      total number of vertices in this graph
+     * @param edges         total number of edges in this graph
+     * @param adjacencyList adjacency list
      */
     public Graph(int vertices, int edges, ArrayList<ArrayList<Integer>> adjacencyList) {
         this.vertices = vertices;
@@ -23,7 +24,7 @@ public class Graph {
     }
 
     public void printPathBetweenVertices(int source, int destination) {
-        if (source > destination){
+        if (source > destination) {
             int tmp = source;
             source = destination;
             destination = tmp;
@@ -48,7 +49,7 @@ public class Graph {
                 }
             }
             for (Integer vertex : adjacencyList.get(source)) {
-                int findings =  pathfinder(vertex, destination, visited, path);
+                int findings = pathfinder(vertex, destination, visited, path);
                 if (findings == -1) {
                 } else {
                     System.out.print(findings + " ");
