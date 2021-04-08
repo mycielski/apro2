@@ -7,3 +7,19 @@ public class Main {
         // write your code here
     }
 }
+
+class Key {
+    protected String firstName, lastName;
+    protected int age, height;
+    protected float shoeNumber;
+    protected double weight;
+// ...
+}
+
+class KeyStd extends Key {
+// ...
+}
+
+class KeyTst extends Key {
+// ...
+}
