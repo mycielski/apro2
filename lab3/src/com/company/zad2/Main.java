@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        // write your code here
         System.out.println("Podaj ścieżkę do pliku z grafem");
         Scanner scanner = new Scanner(System.in);
         String filepath = scanner.nextLine();
