@@ -1,0 +1,42 @@
+Connected to the target VM, address: '127.0.0.1:61062', transport: 'socket'
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+Podaj ścieżkę do pliku z grafem
+MycielskiTomasz.txt
+Wybierz co chcesz zrobić:
+1 - liczenie spójnych składowych grafu
+2 - szukanie ścieżki między wierzchołkami grafu
+cokolwiek innego - wyjście z programu
+1
+22
+Wybierz co chcesz zrobić:
+1 - liczenie spójnych składowych grafu
+2 - szukanie ścieżki między wierzchołkami grafu
+cokolwiek innego - wyjście z programu
+2
+Podaj indeksy wierzchołków między którymi chcesz wyznaczyć ścieżkę.
+316 480
+480 185 236 34 384 47 422 580 26 418 193 337 247 329 218 0 30 286 556 163 6 164 77 358 268 444 483 390 52 410 99 316
+Wybierz co chcesz zrobić:
+1 - liczenie spójnych składowych grafu
+2 - szukanie ścieżki między wierzchołkami grafu
+cokolwiek innego - wyjście z programu
+2
+Podaj indeksy wierzchołków między którymi chcesz wyznaczyć ścieżkę.
+298 68
+298 268 353 565 276 225 503 347 471 55 119 149 484 141 201 10 387 189 173 132 83 463 101 450 420 385 336 491 487 518 368 264 128 541 126 571 283 102 181 281 486 74 197 516 488 145 12 17 278 284 567 231 506 433 121 134 555 369 377 352 560 465 428 448 474 425 378 165 263 552 515 273 386 585 46 21 291 456 472 70 438 437 200 86 415 402 267 13 573 210 257 207 124 586 177 156 508 170 496 178 460 205 406 549 58 296 40 127 454 504 426 381 42 14 528 61 362 226 214 327 155 400 510 87 187 322 44 25 351 144 404 192 254 397 439 235 517 215 548 564 251 120 116 473 199 175 379 85 84 24 224 520 331 72 551 561 2 123 125 477 67 350 195 242 51 28 33 546 52 410 483 390 63 151 527 152 246 500 73 446 65 157 318 122 184 5 495 328 337 247 329 218 0 30 286 556 163 6 164 77 105 380 492 356 566 279 320 220 185 236 34 384 47 422 580 26 418 193 447 22 104 68
+Wybierz co chcesz zrobić:
+1 - liczenie spójnych składowych grafu
+2 - szukanie ścieżki między wierzchołkami grafu
+cokolwiek innego - wyjście z programu
+2
+Podaj indeksy wierzchołków między którymi chcesz wyznaczyć ścieżkę.
+222 160
+222 559 345 1 463 101 450 420 387 189 173 132 83 484 141 201 519 316 93 472 70 438 437 200 86 415 402 267 13 573 210 257 207 165 263 552 515 273 386 585 46 21 291 456 307 259 340 214 74 197 516 447 414 284 567 231 506 455 283 102 440 232 62 429 19 274 497 505 518 368 264 128 393 58 296 40 586 177 156 508 170 496 178 460 205 406 353 565 276 225 503 347 471 55 119 314 192 254 397 439 235 517 215 510 87 187 322 44 25 351 144 404 487 547 153 441 288 157 318 122 184 5 251 488 145 12 17 538 309 268 443 500 73 446 65 525 37 36 193 337 247 329 218 0 30 286 556 163 6 164 77 105 380 492 356 566 279 320 220 185 236 34 384 47 422 580 26 418 183 176 45 107 148 342 96 228 575 29 242 51 28 33 546 52 410 483 390 63 151 527 152 246 120 116 473 199 175 379 85 84 24 224 520 331 72 551 561 2 123 125 477 67 350 195 42 14 528 61 362 226 160
+Wybierz co chcesz zrobić:
+1 - liczenie spójnych składowych grafu
+2 - szukanie ścieżki między wierzchołkami grafu
+cokolwiek innego - wyjście z programu
+exit
+Disconnected from the target VM, address: '127.0.0.1:61062', transport: 'socket'
+
+Process finished with exit code 0
