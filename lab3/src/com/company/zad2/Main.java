@@ -75,7 +75,7 @@ public class Main {
             line = reader.readLine();
             while (line != null) {
                 // if first char of line is a # ignores the line
-                if (line.charAt(0) == '#') {
+                if (line.indexOf('#') == 0) {
                     line = reader.readLine();
                     continue;
                 } else {
