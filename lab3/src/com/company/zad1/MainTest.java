@@ -8,6 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class MainTest {
 
+    /**
+     * Method to permutate the given string
+     * @param str string to permutate
+     * @return string shuffled
+     */
     public static String shuffle(String str) {
         char[] result = str.toCharArray();
 
