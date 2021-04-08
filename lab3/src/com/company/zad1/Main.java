@@ -28,7 +28,16 @@ public class Main {
                 Arrays.sort(substringAsArray);
                 String substringSorted = new String(substringAsArray);
                 listOfSortedString.add(substringSorted);
-                System.out.println(substring +" " + substringSorted);
+                //System.out.println(substring +" " + substringSorted);
+            }
+            for (int k = 0; k < list.size(); k++) {
+                for (int l = k+1; l < list.size(); l++) {
+                    // compare list.get(i) and list.get(j)
+                    if(listOfSortedString.get(k).equals(listOfSortedString.get(l))){
+                        count++;
+                        System.out.println("[" + list.get(k) + " , " +list.get(l) + "]");
+                    }
+                }
             }
         }
         return count;
