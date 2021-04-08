@@ -27,7 +27,7 @@ public class Main {
         long timer, start, finish;
 
         // measuring the performance of KeyTst hashmap
-        HashMap<KeyTst, String> mapTst = new HashMap<KeyTst, String>(1048576, loadFactor);
+        HashMap<KeyTst, String> mapTst = new HashMap<KeyTst, String>(1024, loadFactor);
         ArrayList<KeyTst> keyTstSearchList = new ArrayList<>();
         timer = 0;
         for (int i = 0; i < 1048576; i++) {
@@ -41,7 +41,7 @@ public class Main {
             // search function of my hashmap
         }
         System.out.println("Umieszczenie 1048576 rekordów typu KeyTst -> String w hashmapie zajęło " + timer +
-                "nanosekund.");
+                " nanosekund.");
         start = System.nanoTime();
         for (KeyTst key : keyTstSearchList) mapTst.get(key);
         finish = System.nanoTime();
@@ -49,7 +49,7 @@ public class Main {
         System.out.println("Wyszukanie 104858 rekordów z hashmapy zajęło " + timer + " nanosekund.\n");
 
         // measuring the performance of KeyStd hashmap
-        HashMap<KeyStd, String> mapStd = new HashMap<KeyStd, String>(1048576, loadFactor);
+        HashMap<KeyStd, String> mapStd = new HashMap<KeyStd, String>(1024, loadFactor);
         ArrayList<KeyStd> keyStdSearchList = new ArrayList<>();
         timer = 0;
         for (int i = 0; i < 1048576; i++) {
@@ -63,7 +63,7 @@ public class Main {
             // search function of my hashmap
         }
         System.out.println("Umieszczenie 1048576 rekordów typu KeyStd -> String w hashmapie zajęło " + timer +
-                "nanosekund.");
+                " nanosekund.");
         start = System.nanoTime();
         for (KeyStd key : keyStdSearchList) mapStd.get(key);
         finish = System.nanoTime();
