@@ -1,0 +1,25 @@
+Load factor = 0.25
+Umieszczenie 1048576 rekordów typu KeyTst -> String w hashmapie zajęło 2313314900nanosekund.
+Wyszukanie 104858 rekordów z hashmapy zajęło 91288900 nanosekund.
+
+Umieszczenie 1048576 rekordów typu KeyStd -> String w hashmapie zajęło 1076838500nanosekund.
+Wyszukanie 104858 rekordów z hashmapy zajęło 25018200 nanosekund.
+--------------------------------------------------------------
+
+
+Load factor = 0.75
+Umieszczenie 1048576 rekordów typu KeyTst -> String w hashmapie zajęło 2009705400nanosekund.
+Wyszukanie 104858 rekordów z hashmapy zajęło 92950500 nanosekund.
+
+Umieszczenie 1048576 rekordów typu KeyStd -> String w hashmapie zajęło 1105525000nanosekund.
+Wyszukanie 104858 rekordów z hashmapy zajęło 8322500 nanosekund.
+--------------------------------------------------------------
+
+
+Load factor = 0.95
+Umieszczenie 1048576 rekordów typu KeyTst -> String w hashmapie zajęło 2106804800nanosekund.
+Wyszukanie 104858 rekordów z hashmapy zajęło 87493900 nanosekund.
+
+Umieszczenie 1048576 rekordów typu KeyStd -> String w hashmapie zajęło 1598609400nanosekund.
+Wyszukanie 104858 rekordów z hashmapy zajęło 21855100 nanosekund.
+--------------------------------------------------------------

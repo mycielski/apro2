@@ -22,7 +22,7 @@ public class Main {
     }
 
     public static void hashMapTest(float loadFactor) {
-        System.out.println("\nCommencing testing for load factor " + loadFactor);
+        System.out.println("\nLoad factor = " + loadFactor);
 
         long timer, start, finish;
 
