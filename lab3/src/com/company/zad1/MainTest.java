@@ -30,10 +30,8 @@ class MainTest {
     @RepeatedTest(500)
     void countSubstringAnagrams() {
         String charSetToPermutate = "zxcvbnm";
-        String permutation1 = shuffle(charSetToPermutate);
-        String permutation2 = shuffle(charSetToPermutate);
         StringBuilder sb = new StringBuilder();
-        sb.append("qwertyuiop").append(permutation1).append("asdf").append(permutation2).append("ghjkl");
+        sb.append("qwertyuiop").append(shuffle(charSetToPermutate)).append("asdf").append(shuffle(charSetToPermutate)).append("ghjkl");
         assertTrue(Main.countSubstringAnagrams(sb.toString()) >= 9); // 9 to minimalna liczba anagramów jaka zawsze
         // będzie istnieć w podanym stringu.
     }
