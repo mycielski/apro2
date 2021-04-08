@@ -28,11 +28,10 @@ public class Main {
                 Arrays.sort(substringAsArray);
                 String substringSorted = new String(substringAsArray);
                 listOfSortedString.add(substringSorted);
-                //System.out.println(substring +" " + substringSorted);
             }
+            //comparing the sorted strings and printing their versions before sorting if they are equal
             for (int k = 0; k < list.size(); k++) {
                 for (int l = k+1; l < list.size(); l++) {
-                    // compare list.get(i) and list.get(j)
                     if(listOfSortedString.get(k).equals(listOfSortedString.get(l))){
                         count++;
                         System.out.println("[" + list.get(k) + " , " +list.get(l) + "]");
