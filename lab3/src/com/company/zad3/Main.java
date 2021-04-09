@@ -3,6 +3,7 @@ package com.company.zad3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Random;
 import java.util.zip.Adler32;
 import java.util.zip.Checksum;
@@ -126,6 +127,16 @@ class Key {
 class KeyStd extends Key {
     public KeyStd(String firstName, String lastName, int age, int height, float shoeNumber, double weight) {
         super(firstName, lastName, age, height, shoeNumber, weight);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, age, height, shoeNumber, weight);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }
 
