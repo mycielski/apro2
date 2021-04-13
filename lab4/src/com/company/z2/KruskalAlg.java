@@ -1,9 +1,9 @@
 package com.company.z2;
 
 public class KruskalAlg {
+    private final ListQueue<Edge> mst = new ListQueue<Edge>();
     MinPriorityQueue<Edge> pq = new MinPriorityQueue<Edge>();
     private double weight;
-    private final ListQueue<Edge> mst = new ListQueue<Edge>();
 
     public KruskalAlg(GraphWeighted G) {
         for (Edge e : G.edges()) {
@@ -20,17 +20,6 @@ public class KruskalAlg {
                 weight += e.weight();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        GraphWeighted G = new GraphWeighted(8);
-        G.addExEdge(G);
-        System.out.println(G);
-        KruskalAlg mst = new KruskalAlg(G);
-        for (Edge e : mst.edges()) {
-            System.out.println(e);
-        }
-        System.out.printf("%.2f\n", mst.weight());
     }
 
     public Iterable<Edge> edges() {
