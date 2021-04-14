@@ -35,7 +35,7 @@ public class Main {
                 String[] edgeData = line.split(" ");
                 int v = Integer.parseInt(edgeData[0]);
                 int w = Integer.parseInt(edgeData[1]);
-                double weight = Integer.parseInt(edgeData[2]);
+                double weight = Double.parseDouble(edgeData[2]);
                 graphWeighted.addEdge(new Edge(v, w, weight));
                 line = reader.readLine();
             }

@@ -57,6 +57,8 @@ public class GraphWeighted {
         }
         return list;
     }
+
+
 }
 
 class Edge {
