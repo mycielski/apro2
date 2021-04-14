@@ -11,10 +11,15 @@ public class Main {
         //G.addExEdge(G);
         System.out.println(G);
         KruskalAlg mst = new KruskalAlg(G);
-        for (Edge e : mst.edges()) {
+        for (Edge e : mst.getEdges()) {
             System.out.println(e);
         }
         System.out.printf("%.2f\n", mst.weight());
+        System.out.println("Minimalne drzewo rozpinające:");
+        for (Edge e :
+                mst.getEdges()) {
+            System.out.println(e);
+        }
     }
 
     /**

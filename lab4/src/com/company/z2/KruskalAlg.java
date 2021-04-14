@@ -12,7 +12,7 @@ public class KruskalAlg {
         for (Edge e : G.edges()) {
             pq.add(e);
         }
-        UnionFind uf = new UnionFind(G.V()); //sprawdzenie cykli, klasa do zaimplementowania
+        UnionFind uf = new UnionFind(G.V());
         while (!pq.isEmpty() && mst.size() < G.V() - 1) {
             Edge e = pq.poll();
             int v = e.either();
@@ -25,7 +25,7 @@ public class KruskalAlg {
         }
     }
 
-    public Iterable<Edge> edges() {
+    public Iterable<Edge> getEdges() {
         return mst;
     }
 

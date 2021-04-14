@@ -8,8 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
         GraphWeighted G = generateGraphWeightedFromFile("g250.txt");
-        //G.addExEdge(G); //do zaimplementowania - przykladowy graf
         PrimAlg mst = new PrimAlg(G);
+        System.out.println("Minimalne drzewo rozpinające:");
         for (Edge e : mst.edges()) {
             System.out.println(e);
         }
