@@ -9,7 +9,7 @@ public class KruskalAlg {
         for (Edge e : G.edges()) {
             pq.insert(e);
         }
-        UnionFind uf = new UnionFind(G.V()); //sprawdzenie cykli, klada do zaimplementowania
+        UnionFind uf = new UnionFind(G.V()); //sprawdzenie cykli, klasa do zaimplementowania
         while (!pq.isEmpty() && mst.size() < G.V() - 1) {
             Edge e = pq.delMin();
             int v = e.either();
