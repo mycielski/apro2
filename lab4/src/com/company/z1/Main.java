@@ -7,7 +7,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-        GraphWeighted G = generateGraphWeightedFromFile("g8.txt");
+        GraphWeighted G = generateGraphWeightedFromFile("g250.txt");
         //G.addExEdge(G); //do zaimplementowania - przykladowy graf
         PrimAlg mst = new PrimAlg(G);
         for (Edge e : mst.edges()) {

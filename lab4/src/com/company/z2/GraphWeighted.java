@@ -61,7 +61,7 @@ public class GraphWeighted {
 
 }
 
-class Edge {
+class Edge implements Comparable{
 
     private final int v;
     private final int w;
@@ -98,6 +98,11 @@ class Edge {
         return String.format("%d-%d %.2f", v, w, weight);
     }
 
+    @Override
+    public int compareTo(Object o) {
+        Edge e = (Edge) o;
+        return Double.compare(this.weight, e.weight);
+    }
 }
 
 class Bag<Item> implements Iterable<Item> {
