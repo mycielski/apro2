@@ -8,13 +8,12 @@ public class Main {
 
     public static void main(String[] args) {
         GraphWeighted G = generateGraphWeightedFromFile("g250.txt");
-        //G.addExEdge(G);
         System.out.println(G);
         KruskalAlg mst = new KruskalAlg(G);
         for (Edge e : mst.getEdges()) {
             System.out.println(e);
         }
-        System.out.printf("%.2f\n", mst.weight());
+        System.out.printf("%.2f\n", mst.getWeight());
         System.out.println("Minimalne drzewo rozpinające:");
         for (Edge e :
                 mst.getEdges()) {

@@ -15,6 +15,7 @@ public class UnionFind {
     public int count() { return count; }
 	
 	public boolean connected(int p, int q) {
+        union(p,q);
         return find(p) == find(q);
     }
 	

@@ -29,7 +29,7 @@ public class KruskalAlg {
         return mst;
     }
 
-    public double weight() {
+    public double getWeight() {
         return weight;
     }
 }
