@@ -4,10 +4,10 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public class PrimAlg {
-    private double weight; // waga MST
     private final LinkedList<Edge> mst; // krawedzie MST
     private final boolean[] marked; // marked[v] - wierzcholek w MST
     private final PriorityQueue<Edge> pq; // krawedzie przekroju, dla wierzcholkow w drzewie
+    private double weight; // waga MST
 
     public PrimAlg(GraphWeighted G) {
         mst = new LinkedList<>();

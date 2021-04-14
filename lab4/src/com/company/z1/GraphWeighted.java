@@ -59,7 +59,7 @@ public class GraphWeighted {
     }
 }
 
-class Edge implements Comparable{
+class Edge implements Comparable {
 
     private final int v;
     private final int w;
