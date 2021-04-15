@@ -7,8 +7,10 @@ public class BellmanFordAlg {
     private DirectEdge[] edgeTo; //ostatnia krawedz sciezki s->v
     private boolean[] onQueue; //obecnośc v w kolejce
     private ListQueue<Integer> queue; //wierzcholki w kolejce
+    private boolean verbose;
 
-    public BellmanFordAlg(DigraphWeighted G, int s) {
+    public BellmanFordAlg(DigraphWeighted G, int s, boolean verbose) {
+        this.verbose = verbose;
         distTo = new double[G.V()];
         edgeTo = new DirectEdge[G.V()];
         onQueue = new boolean[G.V()];

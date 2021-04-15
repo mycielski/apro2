@@ -38,7 +38,13 @@ public class Main {
                 case 2:
                     System.out.println("Z którego wierzchołka ruszamy?");
                     int s = new Scanner(System.in).nextInt();
-                    BellmanFordAlg bf = new BellmanFordAlg(G, 1);
+                    System.out.println("""
+                            Jak dokładny opis procesu chcesz zobaczyć?
+                            1 - niedokładny
+                            2 - dokładny""");
+                    int b = new Scanner(System.in).nextInt();
+                    boolean beVerbose = b == 2;
+                    BellmanFordAlg bf = new BellmanFordAlg(G, 1, beVerbose);
                     for (int v = 0; v < G.V(); v++) {
                         if (bf.hasPathTo(v)) {
                             System.out.printf("Z %d do %d (%5.2f) ", s, v,

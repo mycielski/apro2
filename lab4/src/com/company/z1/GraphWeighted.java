@@ -107,16 +107,6 @@ class Bag<Item> implements Iterable<Item> {
     private Node first;  //wierzcholek stosu
     private int N;             //liczba elementow
 
-    public static void main(String[] args) {
-        Bag<String> lista = new Bag<>();
-        lista.add("pierwszy");
-        lista.add("drugi");
-        lista.add("trzeci");
-        lista.add("czwarty");
-        for (String s : lista)
-            System.out.println("el: " + s);
-    }
-
     public boolean isEmpty() {
         return first == null;
     }
