@@ -1,49 +1,22 @@
 package com.company.z3;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
+
     public static void main(String[] args) {
-        int V = 9; // Number of vertices in graph
-        int E = 12; // Number of edges in graph
 
-        GraphDirectedWeighted graph = new GraphDirectedWeighted(V, E);
+        int numberOfVertices = 9;
+        int numberOfEdges = 26;
 
-        ArrayList<GraphDirectedWeighted.Vertex> vertices = new ArrayList<GraphDirectedWeighted.Vertex>();
-        for (int i = 0; i < V; i++) {
-            vertices.add(new GraphDirectedWeighted.Vertex(i));
+        DigraphWeighted G = new DigraphWeighted(numberOfVertices);
+
+        for (int i = 0; i < numberOfEdges; i++) {
+            G.addEdge(new DirectEdge(generateRandomInt(0,numberOfVertices), generateRandomInt(0,numberOfVertices),
+                    generateRandomInt(1,30)));
         }
 
-        for (int i = 0; i < 12; i++) {
-
-            int source = generateRandomInt(0, V);
-            graph.edge[i].src = source;
-
-            int destination = generateRandomInt(0, V);
-            graph.edge[i].dest = destination;
-            while (graph.edge[i].dest == graph.edge[i].src) {
-                destination = generateRandomInt(0, V);
-                graph.edge[i].dest = destination;
-            }
-
-            int weight = generateRandomInt(1, 30);
-            graph.edge[i].weight = weight;
-
-            vertices.get(source).outboundEdges.add(destination);
-            vertices.get(source).outboundEdges.add(weight);
-            vertices.get(destination).inboundEdges.add(source);
-            vertices.get(destination).inboundEdges.add(weight);
-
-            if (i == 12 && !graph.checkIfGraphIsConnected()) {
-                i = 0;
-                vertices.clear();
-                for (int j = 0; j < V; j++) {
-                    vertices.add(new GraphDirectedWeighted.Vertex(j));
-                }
-            }
-        }
 
         int choice = 3;
         while (choice != 0) {
@@ -56,31 +29,37 @@ public class Main {
             choice = new Scanner(System.in).nextInt();
             switch (choice) {
                 case 1:
-                    System.out.println("GRAF:");
-                    for (GraphDirectedWeighted.Vertex vertex :
-                            vertices) {
-                        System.out.println("Wierzchołek #" + vertex.index + ":\n" +
-                                "krawędzie przychodzące z wierzchołków o numerach:");
-                        for (int j = 0; j < vertex.inboundEdges.size()/2; j++) {
-                            System.out.println(vertex.inboundEdges.get(2*j) + ", waga: " + vertex.inboundEdges.get(2*j + 1));
-                        }
-                        System.out.println("krawędzie wychodzące do wierzchołków o numerach:");
-                        for (int j = 0; j < vertex.outboundEdges.size()/2; j++) {
-                            System.out.println(vertex.outboundEdges.get(2*j) + ", waga: " + vertex.outboundEdges.get(2*j + 1));
-                        }
+                    System.out.println("source->destination weight");
+                    for (Bag<DirectEdge> bag :
+                            G.getAdj()) {
+                        System.out.println(bag);
                     }
-                    System.out.println();
                     break;
                 case 2:
-                    graph.BellmanFord(graph, 0,false);
+                    System.out.println("Z którego wierzchołka ruszamy?");
+                    int s = new Scanner(System.in).nextInt();
+                    BellmanFordAlg bf = new BellmanFordAlg(G, 1);
+                    for (int v = 0; v < G.V(); v++) {
+                        if (bf.hasPathTo(v)) {
+                            System.out.printf("Z %d do %d (%5.2f) ", s, v,
+                                    bf.distTo(v));
+                            for (DirectEdge e : bf.pathTo(v)) {
+                                System.out.print(e + " ");
+                            }
+                            System.out.println();
+                        } else {
+                            System.out.printf("Nie istnieje ścieżka z %d do %d\n", s, v);
+                        }
+                    }
                     break;
                 case 0:
                     System.exit(0);
             }
 
         }
-        graph.BellmanFord(graph, 0,false);
+
     }
+
 
     public static int generateRandomInt(int max, int min) {
         return (int) ((Math.random() * (max - min)) + min);
