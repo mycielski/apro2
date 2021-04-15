@@ -28,19 +28,13 @@ public class BellmanFordAlg {
         }
     }
 
-    private void relax(DirectEdge e) {
-        int v = e.from();
-        int w = e.to();
-        if (distTo[w] > distTo[v] + e.weight()) {
-            distTo[w] = distTo[v] + e.weight();
-            edgeTo[w] = e;
-        }
-    }
-
     private void relax(DigraphWeighted G, int v) {
+        if(verbose) System.out.println("Relaksacja krawędzi " + G);
         for (DirectEdge e : G.adj(v)) {
             int w = e.to();
+            System.out.println("Porównanie odległości do " + w + " i " + v);
             if (distTo[w] > distTo[v] + e.weight()) {
+                if (verbose) System.out.println("Odległość do " + w + " jest większa niż odległość do " + v);
                 distTo[w] = distTo[v] + e.weight();
                 edgeTo[w] = e;
                 if (!onQueue[w]) {
