@@ -1,6 +1,7 @@
 package com.company.z3;
 
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 public class BellmanFordAlg {
     private final double[] distTo; //dlugosc sciezki s->v
@@ -29,12 +30,19 @@ public class BellmanFordAlg {
     }
 
     private void relax(DigraphWeighted G, int v) {
-        if (verbose) System.out.println("Relaksacja krawędzi " + G);
+        if (verbose) {
+            System.out.println("Relaksacja krawędzi " + G);
+            sleep();
+        }
         for (DirectEdge e : G.adj(v)) {
             int w = e.to();
             System.out.println("Porównanie odległości do " + w + " i " + v);
+            sleep();
             if (distTo[w] > distTo[v] + e.weight()) {
-                if (verbose) System.out.println("Odległość do " + w + " jest większa niż odległość do " + v);
+                if (verbose) {
+                    System.out.println("Odległość do " + w + " jest większa niż odległość do " + v);
+                    sleep();
+                }
                 distTo[w] = distTo[v] + e.weight();
                 edgeTo[w] = e;
                 if (!onQueue[w]) {
@@ -73,4 +81,14 @@ public class BellmanFordAlg {
             throw new IllegalArgumentException("Blad! wierzcholek nie nalezy do grafu.");
     }
 
+    private void sleep() {
+        if (verbose) {
+            try {
+                TimeUnit.MILLISECONDS.sleep(555);
+            } catch (InterruptedException ignored) {
+
+            }
+        }
+
+    }
 }
