@@ -3,11 +3,11 @@ package com.company.z3;
 import java.util.Stack;
 
 public class BellmanFordAlg {
-    private double[] distTo; //dlugosc sciezki s->v
-    private DirectEdge[] edgeTo; //ostatnia krawedz sciezki s->v
-    private boolean[] onQueue; //obecnośc v w kolejce
-    private ListQueue<Integer> queue; //wierzcholki w kolejce
-    private boolean verbose;
+    private final double[] distTo; //dlugosc sciezki s->v
+    private final DirectEdge[] edgeTo; //ostatnia krawedz sciezki s->v
+    private final boolean[] onQueue; //obecnośc v w kolejce
+    private final ListQueue<Integer> queue; //wierzcholki w kolejce
+    private final boolean verbose;
 
     public BellmanFordAlg(DigraphWeighted G, int s, boolean verbose) {
         this.verbose = verbose;
@@ -29,7 +29,7 @@ public class BellmanFordAlg {
     }
 
     private void relax(DigraphWeighted G, int v) {
-        if(verbose) System.out.println("Relaksacja krawędzi " + G);
+        if (verbose) System.out.println("Relaksacja krawędzi " + G);
         for (DirectEdge e : G.adj(v)) {
             int w = e.to();
             System.out.println("Porównanie odległości do " + w + " i " + v);

@@ -1,8 +1,5 @@
 package com.company.z2;
 
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-
 public class KruskalAlg {
     private final ListQueue<Edge> mst = new ListQueue<Edge>();
     MinPriorityQueue<Edge> pq = new MinPriorityQueue<Edge>();

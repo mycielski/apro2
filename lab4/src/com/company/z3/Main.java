@@ -13,8 +13,8 @@ public class Main {
         DigraphWeighted G = new DigraphWeighted(numberOfVertices);
 
         for (int i = 0; i < numberOfEdges; i++) {
-            G.addEdge(new DirectEdge(generateRandomInt(0,numberOfVertices), generateRandomInt(0,numberOfVertices),
-                    generateRandomInt(1,30)));
+            G.addEdge(new DirectEdge(generateRandomInt(0, numberOfVertices), generateRandomInt(0, numberOfVertices),
+                    generateRandomInt(1, 30)));
         }
 
 

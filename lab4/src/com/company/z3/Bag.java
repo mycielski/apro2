@@ -28,6 +28,16 @@ class Bag<Item> implements Iterable<Item> {
         return new ListIterator();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Iterator<Item> iterator = iterator();
+        while (iterator.hasNext()) {
+            sb.append(iterator.next().toString()).append(" ");
+        }
+        return sb.toString();
+    }
+
     private class Node {
         //klasa wewnetrzna z def. wezlow
         Item item;
@@ -49,16 +59,6 @@ class Bag<Item> implements Iterable<Item> {
 
         public void remove() {
         }
-    }
-
-    @Override
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        Iterator<Item> iterator = iterator();
-        while (iterator.hasNext()){
-            sb.append(iterator.next().toString()).append(" ");
-        }
-        return sb.toString();
     }
 }
 
