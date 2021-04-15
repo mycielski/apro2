@@ -1,7 +1,6 @@
 package com.company.z3;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GraphDirectedWeighted {
@@ -23,6 +22,7 @@ public class GraphDirectedWeighted {
 
     private int v, e;
     private int INFINITY = Integer.MAX_VALUE;
+    private int MINUS_INFINITY = Integer.MIN_VALUE;
     ArrayList<ArrayList> paths;
     Edge[] edge;
 
@@ -44,7 +44,36 @@ public class GraphDirectedWeighted {
         }
     }
 
-    public void BellmanFord(GraphDirectedWeighted graph, int src){
+    static class Vertex{
+        int index;
+
+        ArrayList<Integer> outboundEdges = new ArrayList<Integer>();
+        ArrayList<Integer> inboundEdges = new ArrayList<Integer>();
+
+        public Vertex(int index) {
+            this.index = index;
+        }
+    }
+
+    public boolean checkIfGraphIsConnected(){
+        Boolean[] visited = new Boolean[edge.length];
+        Edge root = edge[0];
+        visited[root.dest] = true;
+        visited[root.src] = true;
+        Queue<Edge> queue = new LinkedList<>();
+        queue.add(root);
+        Edge current;
+        while (!queue.isEmpty()){
+            current = queue.poll();
+            visited[current.dest] = true;
+            visited[current.src] = true;
+            queue.add(edge[current.dest]);
+            queue.add(edge[current.src]);
+        }
+        return !Arrays.asList(visited).contains(false);
+    }
+
+    public void BellmanFord(GraphDirectedWeighted graph, int src, boolean verbose){
         int v = graph.v;
         int e = graph.e;
         int dist[] = new int[v];
@@ -75,16 +104,19 @@ public class GraphDirectedWeighted {
                     dist[d] = dist[s] + weight;
             }
         }
-        System.out.println("#############");
+        System.out.println("############################################################################################");
         for (int i = 0; i < ways.size(); i++){
-            System.out.println("Trasa z " + src + " do " + i);
-            System.out.println(src);
+            if(dist[i] == INFINITY || dist[i] == MINUS_INFINITY || src == i) continue;
+            else if (dist[i] < 0) dist[i] = dist[i] - MINUS_INFINITY;
             List<Integer> list = ways.get(i).stream().distinct().collect(Collectors.toList());
+            StringBuilder output = new StringBuilder().append("Trasa z ").append(src).append(" do ").append(i).append(", o wadze ").append(dist[i]);
+            output.append("\n").append(src);
             for (Integer stop :
                     list) {
-                System.out.println(stop);
+                output.append("\n").append(stop);
             }
-            System.out.println(i);
+            output.append("\n").append(i);
+            System.out.println(output);
         }
 
     }

@@ -4,22 +4,21 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public class KruskalAlg {
-    private final LinkedList<Edge> mst = new LinkedList<Edge>();
-    PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
+    private final ListQueue<Edge> mst = new ListQueue<Edge>();
+    MinPriorityQueue<Edge> pq = new MinPriorityQueue<Edge>();
     private double weight;
 
     public KruskalAlg(GraphWeighted G) {
         for (Edge e : G.edges()) {
-            pq.add(e);
+            pq.insert(e);
         }
         UnionFind uf = new UnionFind(G.V());
         while (!pq.isEmpty() && mst.size() < G.V() - 1) {
-            Edge e = pq.poll();
+            Edge e = pq.delMin();
             int v = e.either();
             int w = e.other(v);
             if (uf.connected(v, w)) {
-                uf.union(v, w);
-                mst.add(e);
+                mst.enqueue(e);
                 weight += e.weight();
             }
         }

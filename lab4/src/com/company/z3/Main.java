@@ -1,52 +1,88 @@
 package com.company.z3;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
-        int V = 5; // Number of vertices in graph
-        int E = 8; // Number of edges in graph
+        int V = 9; // Number of vertices in graph
+        int E = 12; // Number of edges in graph
 
         GraphDirectedWeighted graph = new GraphDirectedWeighted(V, E);
 
-        // add edge 0-1 (or A-B in above figure)
-        graph.edge[0].src = 0;
-        graph.edge[0].dest = 1;
-        graph.edge[0].weight = 1;
+        ArrayList<GraphDirectedWeighted.Vertex> vertices = new ArrayList<GraphDirectedWeighted.Vertex>();
+        for (int i = 0; i < V; i++) {
+            vertices.add(new GraphDirectedWeighted.Vertex(i));
+        }
 
-        // add edge 0-2 (or A-C in above figure)
-        graph.edge[1].src = 0;
-        graph.edge[1].dest = 2;
-        graph.edge[1].weight = 4;
+        for (int i = 0; i < 12; i++) {
 
-        // add edge 1-2 (or B-C in above figure)
-        graph.edge[2].src = 1;
-        graph.edge[2].dest = 2;
-        graph.edge[2].weight = 3;
+            int source = generateRandomInt(0, V);
+            graph.edge[i].src = source;
 
-        // add edge 1-3 (or B-D in above figure)
-        graph.edge[3].src = 1;
-        graph.edge[3].dest = 3;
-        graph.edge[3].weight = 2;
+            int destination = generateRandomInt(0, V);
+            graph.edge[i].dest = destination;
+            while (graph.edge[i].dest == graph.edge[i].src) {
+                destination = generateRandomInt(0, V);
+                graph.edge[i].dest = destination;
+            }
 
-        // add edge 1-4 (or A-E in above figure)
-        graph.edge[4].src = 1;
-        graph.edge[4].dest = 4;
-        graph.edge[4].weight = 2;
+            int weight = generateRandomInt(1, 30);
+            graph.edge[i].weight = weight;
 
-        // add edge 3-2 (or D-C in above figure)
-        graph.edge[5].src = 3;
-        graph.edge[5].dest = 2;
-        graph.edge[5].weight = 5;
+            vertices.get(source).outboundEdges.add(destination);
+            vertices.get(source).outboundEdges.add(weight);
+            vertices.get(destination).inboundEdges.add(source);
+            vertices.get(destination).inboundEdges.add(weight);
 
-        // add edge 3-1 (or D-B in above figure)
-        graph.edge[6].src = 3;
-        graph.edge[6].dest = 1;
-        graph.edge[6].weight = 1;
+            if (i == 12 && !graph.checkIfGraphIsConnected()) {
+                i = 0;
+                vertices.clear();
+                for (int j = 0; j < V; j++) {
+                    vertices.add(new GraphDirectedWeighted.Vertex(j));
+                }
+            }
+        }
 
-        // add edge 4-3 (or E-D in above figure)
-        graph.edge[7].src = 4;
-        graph.edge[7].dest = 3;
-        graph.edge[7].weight = 3;
+        int choice = 3;
+        while (choice != 0) {
+            System.out.println("""
+                    Wybierz co chcesz zrobić:
+                    1 - wypisz graf na konsolę
+                    2 - znajdź najkrótsze drogi do wierzchołków
+                    0 - wyjście z programu
+                    """);
+            choice = new Scanner(System.in).nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.println("GRAF:");
+                    for (GraphDirectedWeighted.Vertex vertex :
+                            vertices) {
+                        System.out.println("Wierzchołek #" + vertex.index + ":\n" +
+                                "krawędzie przychodzące z wierzchołków o numerach:");
+                        for (int j = 0; j < vertex.inboundEdges.size()/2; j++) {
+                            System.out.println(vertex.inboundEdges.get(2*j) + ", waga: " + vertex.inboundEdges.get(2*j + 1));
+                        }
+                        System.out.println("krawędzie wychodzące do wierzchołków o numerach:");
+                        for (int j = 0; j < vertex.outboundEdges.size()/2; j++) {
+                            System.out.println(vertex.outboundEdges.get(2*j) + ", waga: " + vertex.outboundEdges.get(2*j + 1));
+                        }
+                    }
+                    System.out.println();
+                    break;
+                case 2:
+                    graph.BellmanFord(graph, 0,false);
+                    break;
+                case 0:
+                    System.exit(0);
+            }
 
-        graph.BellmanFord(graph, 0);    }
+        }
+        graph.BellmanFord(graph, 0,false);
+    }
+
+    public static int generateRandomInt(int max, int min) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
 }
