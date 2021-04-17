@@ -1,8 +1,7 @@
 package com.company;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class CSVReader {
@@ -11,9 +10,8 @@ public class CSVReader {
     private final int columns;
     private final BufferedReader reader;
     private final String filepath;
-    private int lines;
     private final String[][] sheet;
-
+    private int lines;
     public CSVReader(String filepath) throws IOException {
         this.filepath = filepath;
         reader = new BufferedReader(new FileReader(filepath));
@@ -22,24 +20,23 @@ public class CSVReader {
         countLines();
         sheet = new String[lines][columns];
         fillSheet();
+        Stream<String> stream = streamValues();
+        //stream.forEach(System.out::println);
     }
 
-    public String[][] getSheet() {
-        return sheet;
-    }
-
-    public String getFilepath() {
-        return filepath;
+    public int getColumns() {
+        return columns;
     }
 
     private void fillSheet() throws IOException {
-        for (int i = 0; i < columns; i++) {
-            sheet[0][i] = headerRow[i];
-        }
-        for (int i = 1; i < lines; i++) {
+        Scanner scanner = new Scanner(new File(filepath));
+        scanner.useDelimiter(",|\n|\r|\s$|$\s");
+        for (int i = 0; i < lines; i++) {
             for (int j = 0; j < columns; j++) {
-                String[] row = reader.readLine().split(",");
-                sheet[i][j] = row[j];
+                String string = scanner.next();
+                //System.out.println(string);
+                sheet[i][j] = string;
+                if (!scanner.hasNext()) return;
             }
         }
 
@@ -54,25 +51,34 @@ public class CSVReader {
         }
     }
 
-    public String[] getHeaderRow() {
-        return headerRow;
+    public int getLines() {
+        return lines;
     }
 
-    public int getColumns() {
-        return columns;
-    }
-
-    public Stream<String[]> getStreamOfLineValues() throws IOException {
-        Stream.Builder<String[]> builder = Stream.builder();
-        String line = reader.readLine();
-        while (!line.equals(null)) {
-            builder.add(line.split(","));
-            line = reader.readLine();
+    public Stream<String> streamValues() throws FileNotFoundException {
+        Stream.Builder<String> builder = Stream.builder();
+        Scanner scanner = new Scanner(new File(filepath));
+        scanner.useDelimiter(",");
+        while (scanner.hasNextLine()) {
+            for (String string :
+                    scanner.nextLine().split(",")) {
+                builder.add(string);
+            }
         }
         return builder.build();
     }
 
-    public int getLines() {
-        return lines;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Plik ");
+        sb.append(filepath).append(" ma ").append(columns).append(" kolumn danych:\n");
+        int i = 0;
+        for (String string :
+                headerRow) {
+            sb.append(i).append(") ").append(string).append("\n");
+            i++;
+        }
+        sb.append("Plik ten ma ").append(lines).append(" linijek długości.");
+        return sb.toString();
     }
 }
