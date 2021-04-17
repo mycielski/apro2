@@ -10,36 +10,19 @@ public class CSVReader {
     private final int columns;
     private final BufferedReader reader;
     private final String filepath;
-    private final String[][] sheet;
     private int lines;
+
     public CSVReader(String filepath) throws IOException {
         this.filepath = filepath;
         reader = new BufferedReader(new FileReader(filepath));
         headerRow = reader.readLine().split(",");
         columns = headerRow.length;
         countLines();
-        sheet = new String[lines][columns];
-        fillSheet();
         Stream<String> stream = streamValues();
-        //stream.forEach(System.out::println);
     }
 
     public int getColumns() {
         return columns;
-    }
-
-    private void fillSheet() throws IOException {
-        Scanner scanner = new Scanner(new File(filepath));
-        scanner.useDelimiter(",|\n|\r|\s$|$\s");
-        for (int i = 0; i < lines; i++) {
-            for (int j = 0; j < columns; j++) {
-                String string = scanner.next();
-                //System.out.println(string);
-                sheet[i][j] = string;
-                if (!scanner.hasNext()) return;
-            }
-        }
-
     }
 
     private void countLines() {
