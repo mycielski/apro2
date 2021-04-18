@@ -1,15 +1,24 @@
 # Zadanie nr 2 z APRO2
 
 ## Tomasz Mycielski (304248)
-
+###### To sprawozdanie ma 637 słów, a jego przeczytanie zajmuje około 5 minut.
 --------------
 
 ### Zbiór danych
 
 Jako zbiór danych wybrałem spis transakcji sprzedaży na rynku nieruchomości w hrabstwie Sacramento w Kalifornii w trzecim tygodniu maja 2008. Każdy wiersz pliku opisuje jedną transakcję. Plik `Sacramentorealestatetransactions.csv`, który przetwarzam ma 12 kolumn danych:
-
-street | city | zip | state | beds | baths | sq__ft | type | sale_date | price | latitude | longitute
----|---|---|---|---|---|---|---|---|---|---|---
+- street
+- city
+- zip
+- state
+- beds
+- baths
+- sq__ft
+- type
+- sale_date
+- price
+- latitude
+- longitude
 
 W pliku tym opisane są 942 transakcje.
 
@@ -26,10 +35,10 @@ Wartości odczytywane wiersz po wierszu dodawane są do stream buildera, aby po 
 ```java
         Stream.Builder<String> builder = Stream.builder();
         while (scanner.hasNextLine()) {
-            for (String string :
-                scanner.nextLine().split(",")) {
-                builder.add(string);
-            }
+        for (String string :
+        scanner.nextLine().split(",")) {
+        builder.add(string);
+        }
         }
         return builder.build();
 ```
@@ -61,13 +70,13 @@ Ceny w pliku podane są jako liczby całkowite, można więc korzystać z typu `
 W celu uzyskania interesujących nas danych z pliku csv i zapisania ich do HashMapy wykorzystana została pętla `for`:
 ```java
         for (int i = 1; i < list.size() - 8; i += 12) {
-            int price = pricesHashMap.get(list.get(i))[0];
-            int denominator = pricesHashMap.get(list.get(i))[1];
-            int squareFootage = pricesHashMap.get(list.get(i))[2];
-            squareFootage += Integer.parseInt(list.get(i + 5));
-            price += Double.parseDouble(list.get(i + 8));
-            denominator++;
-            pricesHashMap.put(list.get(i), new int[]{price, denominator, squareFootage});
+        int price = pricesHashMap.get(list.get(i))[0];
+        int denominator = pricesHashMap.get(list.get(i))[1];
+        int squareFootage = pricesHashMap.get(list.get(i))[2];
+        squareFootage += Integer.parseInt(list.get(i + 5));
+        price += Double.parseDouble(list.get(i + 8));
+        denominator++;
+        pricesHashMap.put(list.get(i), new int[]{price, denominator, squareFootage});
         }
 ```
 Nazwa miasta przechowywana jest w pliku csv kolumnie o indeksie `1`, powierzchnia w kolumnie `6`, cena w kolumnie `9`. Jeśli pod indeksem `i` w `list` zapisana jest nazwa miasta, to pod indeksem `i+5` będzie powierzchnia sprzedanej nieruchomości, a pod indeksem `i+8` będzie jej cena; możemy zatem zapisać wartości z komórki `i+5` i `i+8` parsować z typu `String` na typ `int`.
