@@ -17,7 +17,6 @@ public class CSVReader {
         headerRow = reader.readLine().split(",");
         columns = headerRow.length;
         countLines();
-        streamValues();
     }
 
     public int getColumns() {
@@ -34,9 +33,9 @@ public class CSVReader {
     }
 
     public Stream<String> streamValues() throws FileNotFoundException {
-        Stream.Builder<String> builder = Stream.builder();
         Scanner scanner = new Scanner(new File(filepath));
         scanner.useDelimiter(",");
+        Stream.Builder<String> builder = Stream.builder();
         while (scanner.hasNextLine()) {
             for (String string :
                     scanner.nextLine().split(",")) {

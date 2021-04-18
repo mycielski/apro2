@@ -12,15 +12,10 @@ public class Main {
         System.out.println(csvReader);
         int columnIndex = 1;
         int counter = 0;
-        ArrayList<String> list = (ArrayList<String>) csvReader.streamValues().collect(Collectors.toList());
-        if (csvReader.getColumns() > 0) {
-            list.subList(0, csvReader.getColumns()).clear();
-        }
+        ArrayList<String> list = (ArrayList<String>) csvReader.streamValues().collect(Collectors.toList()); // zapisywanie wartości wszystkich pól danych do ArrayListy
+        list.subList(0, csvReader.getColumns()).clear(); // usuwanie danych z pierwszego wiersza pliku
         Set<String> set = new LinkedHashSet<>();
         for (String string : list) {
-            while (counter < 12) {
-                counter++;
-            }
             if (counter % csvReader.getColumns() == columnIndex) {
                 set.add(string);
             }
