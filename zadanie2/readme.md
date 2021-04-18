@@ -2,6 +2,8 @@
 
 ## Tomasz Mycielski (304248)
 
+--------------
+
 ### Zbiór danych
 
 Jako zbiór danych wybrałem spis transakcji sprzedaży na rynku nieruchomości w hrabstwie Sacramento w Kalifornii w 
@@ -26,7 +28,8 @@ odczytywane są za pomocą klasy `Scanner` z wykorzystaniem znaku `,` jako ogran
         Scanner scanner = new Scanner(new File(filepath)); // filepath to ścieżka do pliku
         scanner.useDelimiter(",");
 ```
-Wartości odczytywane wiersz po wierszu dodawane są do stream buildera aby po odczytaniu całego pliku zostały zwrócone w formie strumienia.
+Wartości odczytywane wiersz po wierszu dodawane są do stream buildera, aby po odczytaniu całego pliku zostały 
+zwrócone w formie strumienia.
 ```java
         Stream.Builder<String> builder = Stream.builder();
         while (scanner.hasNextLine()) {
@@ -40,7 +43,7 @@ Wartości odczytywane wiersz po wierszu dodawane są do stream buildera aby po o
 
 Metoda `toString()` zwraca informację o zawartości pierwszego wiersza pliku (nagłówka) oraz o liczbie wierszy w pliku.
 
-Ponadto w klasie są jeszcze metody `getColumns()` i `countLines()`, które robią dokładnie to na co wskazuje ich nazwa.
+Ponadto w klasie są jeszcze metody `getColumns()` i `countLines()`, które robią dokładnie to, na co wskazuje ich nazwa.
 
 ### Klasa `Main`
 
@@ -56,15 +59,17 @@ list.subList(0, csvReader.getColumns()).clear();
 ```
 Następnie z kolumny `city` wszystkie wartości zapisuję do zbioru `set`. Dzięki temu będę miał wszystkie miasta zapisane w jednej strukturze danych bez powtórzeń.
 
-Aby obliczyć statystyczne dane dla każdego z miast tworzę HashMapę`HashMap<String, int[]> pricesHashMap`. Jej kluczem 
+Aby obliczyć statystyczne dane dla każdego z miast, tworzę HashMapę`HashMap<String, int[]> pricesHashMap`. Jej kluczem 
 będą nazwy 
 miast, a wartością tablica trzech integerów (kolejno): 
 - sumie kosztu wszystkich zakupionych nieruchomości, 
 - ilości transakcji w tym mieście,
-- sumie stóp kwadratowych wszystkich zakupionych nieruchomości.
+- sumie stóp kwadratowych wszystkich zakupionych nieruchomości. 
+
 Ceny w pliku podane są jako liczby całkowite, można więc korzystać z typu `int` do przedstawiania ich w programie.
   
-W celu uzyskania interesujących nas danych z pliku csv i zapisania ich do HashMapy wykorzystaana została pętla `for`:
+
+W celu uzyskania interesujących nas danych z pliku csv i zapisania ich do HashMapy wykorzystana została pętla `for`:
 ```java
         for (int i = 1; i < list.size() - 8; i += 12) {
             int price = pricesHashMap.get(list.get(i))[0];
@@ -86,11 +91,17 @@ Dla każdej transakcji jej dane zapisywane są do `pricesHashMap`:
 - suma powierzchni zakupionych nieruchomości w tym mieście jest zwiększana o powierzchnię nieruchomości, której 
   dotyczyła ta transakcja.
   
+
   Po wykonaniu tych operacji dla każdej transakcji obliczana jest średnia cena nieruchomości dla każdego miasta, 
   średnia cena jednej stopy kwadratowej dla każdego miasta oraz odchylenie standardowe ceny jednej stopy kwadratowej.
+  
+
   Do wykonania tych obliczeń wykorzystywane są metody `mean(LinkedList<Integer> listOfIntegers)` oraz `stDev
-  (LinkedList<Integer> listOfIntegers, int mean)`.
+  (LinkedList<Integer> listOfIntegers, int mean)`. Metoda `stDev` do obliczenia sumy wykorzystuje strumień:
+```java
+double summation = listOfIntegers.stream().mapToDouble(integer -> Math.pow((double) integer - (double) mean, 2)).sum();
+```
   
 Na podstawie obliczonych danych dla każdego z miast na konsolę wypisane zostają miasta, w których ceny nieruchomości 
 są najwyższe. Ponadto na podstawie odchylenia standardowego wypisany zostaje na konsolę wniosek, czy różnice w 
-cenach nieruchomości w regionie są wysokie, czy niskie, w zależności od miasta, w którym decydujemy się na zakup.
+cenach nieruchomości w regionie są wysokie, czy niskie, w zależności od miasta ich zakupu.
