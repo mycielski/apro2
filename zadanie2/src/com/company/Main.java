@@ -70,23 +70,23 @@ public class Main {
         System.out.println("Odchylenie standardowe cen na stopę kwadratową to " + stDevOfSqFootPrices + " dolary.");
         System.out.println("Srednia cena stopy kwadratowej nieruchomości to " + mean(pricesPerSqFoot) + " dolary.");
         if (stDevOfSqFootPrices > mean(pricesPerSqFoot)) System.out.println("Tak wysokie odchylenie standardowe " +
-                "wskazuje na duże zróżnicowanie cen nieruchomości w tym regionie.");
+                "wskazuje na duże zróżnicowanie cen nieruchomości w zależności od miasta.");
         else System.out.println("Tak niskie odchylenie standardowe wskazuje na małe zróżnicowanie cen nieruchomości" +
-                " w tym regionie.");
+                " w zależności od miasta.");
     }
 
-    public static int mean(LinkedList<Integer> list) {
+    public static int mean(LinkedList<Integer> listOfIntegers) {
         double mean = 0;
         for (Integer integer :
-                list) {
-            mean += ((double) integer) / list.size();
+                listOfIntegers) {
+            mean += ((double) integer) / listOfIntegers.size();
         }
         return (int) mean;
     }
 
-    public static int stDev(LinkedList<Integer> list, int mean) {
-        double summation = list.stream().mapToDouble(integer -> Math.pow((double) integer - (double) mean, 2)).sum();
-        summation = summation / list.size();
+    public static int stDev(LinkedList<Integer> listOfIntegers, int mean) {
+        double summation = listOfIntegers.stream().mapToDouble(integer -> Math.pow((double) integer - (double) mean, 2)).sum();
+        summation = summation / listOfIntegers.size();
         return (int) Math.sqrt(summation);
     }
 }
