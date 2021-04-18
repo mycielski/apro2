@@ -2,8 +2,6 @@
 
 ## Tomasz Mycielski (304248)
 
---------------
-
 ### Zbiór danych
 
 Jako zbiór danych wybrałem spis transakcji sprzedaży na rynku nieruchomości w hrabstwie Sacramento w Kalifornii w 
