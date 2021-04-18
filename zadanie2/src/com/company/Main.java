@@ -10,18 +10,16 @@ public class Main {
 
         CSVReader csvReader = new CSVReader("Sacramentorealestatetransactions.csv");
         System.out.println(csvReader);
-        int numberOfDataCells = csvReader.getColumns() * csvReader.getLines();
         int columnIndex = 1;
         int counter = 0;
         ArrayList<String> list = (ArrayList<String>) csvReader.streamValues().collect(Collectors.toList());
-        for (int i = 0; i < csvReader.getColumns(); i++) {
-            list.remove(0);
+        if (csvReader.getColumns() > 0) {
+            list.subList(0, csvReader.getColumns()).clear();
         }
         Set<String> set = new LinkedHashSet<>();
         for (String string : list) {
             while (counter < 12) {
                 counter++;
-                continue;
             }
             if (counter % csvReader.getColumns() == columnIndex) {
                 set.add(string);
@@ -33,35 +31,35 @@ public class Main {
         HashMap<String, int[]> pricesHashMap = new HashMap<>();
         for (String city :
                 set) {
-            pricesHashMap.put(city, new int[]{0,0,0});
+            pricesHashMap.put(city, new int[]{0, 0, 0});
         }
-        for (int i = 1; i < list.size()-8; i+=12) {
+        for (int i = 1; i < list.size() - 8; i += 12) {
             int price = pricesHashMap.get(list.get(i))[0];
             int denominator = pricesHashMap.get(list.get(i))[1];
             int squareFootage = pricesHashMap.get(list.get(i))[2];
-            squareFootage += Integer.parseInt(list.get(i+5));
-            price += Double.parseDouble(list.get(i+8));
+            squareFootage += Integer.parseInt(list.get(i + 5));
+            price += Double.parseDouble(list.get(i + 8));
             denominator++;
-            pricesHashMap.put(list.get(i),new int[]{price,denominator,squareFootage});
+            pricesHashMap.put(list.get(i), new int[]{price, denominator, squareFootage});
         }
         System.out.println("Srednie ceny nieruchomości w poszczególnych miastach to:");
         String mostExpensivePropertyCity = "";
         String mostExpensiveSqFootCity = "";
         int price = 0;
-        int averagePricePerSqFoot=0;
+        int averagePricePerSqFoot = 0;
         LinkedList<Integer> pricesPerSqFoot = new LinkedList<>();
         for (String key :
                 pricesHashMap.keySet()) {
-            int avgPrice = pricesHashMap.get(key)[0]/pricesHashMap.get(key)[1];
+            int avgPrice = pricesHashMap.get(key)[0] / pricesHashMap.get(key)[1];
             try {
                 if (pricesHashMap.get(key)[0] / pricesHashMap.get(key)[2] <= 0) throw new ArithmeticException();
                 System.out.println(key + ") " + (avgPrice) + " USD (" + pricesHashMap.get(key)[0] / pricesHashMap.get(key)[2] + " dolarów na stopę kwadratową)");
                 pricesPerSqFoot.add(pricesHashMap.get(key)[0] / pricesHashMap.get(key)[2]);
-            } catch (ArithmeticException e){
+            } catch (ArithmeticException e) {
                 System.out.println(key + ") " + (avgPrice) + " USD (brak danych o cenie / stopa kwadratowa)");
                 continue;
             }
-            if (pricesHashMap.get(key)[0] / pricesHashMap.get(key)[2] > averagePricePerSqFoot){
+            if (pricesHashMap.get(key)[0] / pricesHashMap.get(key)[2] > averagePricePerSqFoot) {
                 averagePricePerSqFoot = pricesHashMap.get(key)[0] / pricesHashMap.get(key)[2];
                 mostExpensiveSqFootCity = key;
             }
@@ -70,19 +68,27 @@ public class Main {
                 mostExpensivePropertyCity = key;
             }
         }
-        int stDevOfSqFootPrices = stDev(pricesPerSqFoot, averagePricePerSqFoot);
+        int stDevOfSqFootPrices = stDev(pricesPerSqFoot, mean(pricesPerSqFoot));
         System.out.println("Możemy z tego wywnioskować, że najbardziej ekskluzywnym miastem jest " + mostExpensivePropertyCity + " gdzie " +
                 "średnia cena nieruchomości to aż " + price + " dolary, lub " + mostExpensiveSqFootCity + ", gdzie " +
-                "średnia cena za stopę kwadratową to aż " + averagePricePerSqFoot + " dolary!" );
+                "średnia cena za stopę kwadratową to aż " + averagePricePerSqFoot + " dolary!");
         System.out.println("Odchylenie standardowe cen na stopę kwadratową to " + stDevOfSqFootPrices + " dolary.");
+        System.out.println("Srednia cena stopy kwadratowej nieruchomości to " + mean(pricesPerSqFoot) + " dolary.");
+        if (stDevOfSqFootPrices > mean(pricesPerSqFoot)) System.out.println("Tak wysokie odchylenie standardowe " +
+                "wskazuje na duże zróżnicowanie cen nieruchomości.");
     }
 
-    public static int stDev(LinkedList<Integer> list, int average){
-        double summation = 0;
-        double mean = (double) average;
-        for (int i = 0; i < list.size(); i++) {
-            summation += Math.pow((double) list.get(i) - mean, 2);
+    public static int mean(LinkedList<Integer> list) {
+        double mean = 0;
+        for (Integer integer :
+                list) {
+            mean += ((double) integer) / list.size();
         }
+        return (int) mean;
+    }
+
+    public static int stDev(LinkedList<Integer> list, int average) {
+        double summation = list.stream().mapToDouble(integer -> Math.pow((double) integer - (double) average, 2)).sum();
         summation = summation / list.size();
         return (int) Math.sqrt(summation);
     }
