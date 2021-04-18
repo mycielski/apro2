@@ -89,8 +89,8 @@ public class Main {
         return (int) mean;
     }
 
-    public static int stDev(LinkedList<Integer> list, int average) {
-        double summation = list.stream().mapToDouble(integer -> Math.pow((double) integer - (double) average, 2)).sum();
+    public static int stDev(LinkedList<Integer> list, int mean) {
+        double summation = list.stream().mapToDouble(integer -> Math.pow((double) integer - (double) mean, 2)).sum();
         summation = summation / list.size();
         return (int) Math.sqrt(summation);
     }
