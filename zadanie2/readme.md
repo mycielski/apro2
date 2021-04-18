@@ -70,7 +70,7 @@ W celu uzyskania interesujących nas danych z pliku csv i zapisania ich do HashM
             pricesHashMap.put(list.get(i), new int[]{price, denominator, squareFootage});
         }
 ```
-Nazwa miasta przechowywana jest w pliku csv kolumnie o indeksie `1`, powierzchnia w kolumnie `6`, cena w kolumnie `9`. Jeśli pod indeksem `i` w `list` zapisana jest nazwa miasta, to pod indeksem `i+5` będzie powierzchnia sprzedanej nieruchomości, a pod indeksem `i+8` będzie jej cena.
+Nazwa miasta przechowywana jest w pliku csv kolumnie o indeksie `1`, powierzchnia w kolumnie `6`, cena w kolumnie `9`. Jeśli pod indeksem `i` w `list` zapisana jest nazwa miasta, to pod indeksem `i+5` będzie powierzchnia sprzedanej nieruchomości, a pod indeksem `i+8` będzie jej cena; możemy zatem zapisać wartości z komórki `i+5` i `i+8` parsować z typu `String` na typ `int`.
 
 Dla każdej transakcji jej dane zapisywane są do `pricesHashMap`:
 - koszt transakcji jest dodawany do sumy pieniędzy wydanych na nieruchomości w tym mieście,
