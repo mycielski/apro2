@@ -75,7 +75,9 @@ public class Main {
         System.out.println("Odchylenie standardowe cen na stopę kwadratową to " + stDevOfSqFootPrices + " dolary.");
         System.out.println("Srednia cena stopy kwadratowej nieruchomości to " + mean(pricesPerSqFoot) + " dolary.");
         if (stDevOfSqFootPrices > mean(pricesPerSqFoot)) System.out.println("Tak wysokie odchylenie standardowe " +
-                "wskazuje na duże zróżnicowanie cen nieruchomości.");
+                "wskazuje na duże zróżnicowanie cen nieruchomości w tym regionie.");
+        else System.out.println("Tak niskie odchylenie standardowe wskazuje na małe zróżnicowanie cen nieruchomości" +
+                " w tym regionie.");
     }
 
     public static int mean(LinkedList<Integer> list) {
