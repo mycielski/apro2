@@ -8,17 +8,16 @@ public class CSVReader {
 
     private final String[] headerRow;
     private final int columns;
-    private final BufferedReader reader;
     private final String filepath;
     private int lines;
 
     public CSVReader(String filepath) throws IOException {
         this.filepath = filepath;
-        reader = new BufferedReader(new FileReader(filepath));
+        BufferedReader reader = new BufferedReader(new FileReader(filepath));
         headerRow = reader.readLine().split(",");
         columns = headerRow.length;
         countLines();
-        Stream<String> stream = streamValues();
+        streamValues();
     }
 
     public int getColumns() {
@@ -32,10 +31,6 @@ public class CSVReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public int getLines() {
-        return lines;
     }
 
     public Stream<String> streamValues() throws FileNotFoundException {
