@@ -121,6 +121,93 @@ Moją szczególną uwagę zwrócił fakt, że w przypadku programu korzystające
 Pliki `.class`, które podawałem do `javap` dostępne są w [lab5/out/production/lab5/com/company/z1/](./out/production/lab5/com/company/z1/).
 
 ## Zadanie 2
+Do wykonania tego zadania wykorzystałem program Ghidra. Po zaimportowaniu danego pliku do Ghidry dowiedziałem się, że program składa się z klas - `Coder` i `Main`. Następnie otworzyłem obydwie klasy w narzędziu CodeBrowser po wykonaniu wszystkich dostępnych w nim automatycznych analiz. Dzięki temu uzyskłem poniższy kod:
+- `Main.class`:
+```java
+/* Flags:
+     ACC_PUBLIC
+     ACC_STATIC
+   
+   public static void main(java.lang.String[])  */
 
+void main_java.lang.String[]_void(void[] param1)
+
+{
+  PrintStream pPVar1;
+  void[] ppvVar2;
+  Instant pIVar3;
+  Date pDVar4;
+  String pSVar5;
+  int iVar6;
+  int iVar7;
+  boolean bVar8;
+  SimpleDateFormat objectRef;
+  void objectRef_00;
+  
+  if (param1.length != 1) {
+    pPVar1 = System.out;
+    pPVar1.println("Wrong password!");
+    return;
+  }
+  ppvVar2 = param1[0].split("_");
+  pIVar3 = Instant.now();
+  pDVar4 = Date.from(pIVar3);
+  objectRef = new SimpleDateFormat("MM");
+  pSVar5 = objectRef.format(pDVar4);
+  iVar6 = Integer.parseInt(pSVar5);
+  iVar7 = ppvVar2[0].length();
+  if ((iVar7 == 7) && (iVar7 = ppvVar2[1].length(), iVar7 == 2)) {
+    objectRef_00 = ppvVar2[0];
+    pSVar5 = Coder.code("00PYe8m");
+    bVar8 = objectRef_00.equals(pSVar5);
+    if ((bVar8 != false) && (iVar7 = Integer.parseInt(ppvVar2[1]), iVar7 == iVar6)) {
+      pPVar1 = System.out;
+      pPVar1.println("Good guess");
+      return;
+    }
+    pPVar1 = System.out;
+    pPVar1.println("Wrong password!");
+    return;
+  }
+  pPVar1 = System.out;
+  pPVar1.println("Wrong password!");
+  return;
+}
+```
+
+- `Coder.class`:
+```java
+/* Flags:
+     ACC_STATIC
+   
+   static String code(java.lang.String)  */
+
+String code_java.lang.String_java.lang.String(void param1)
+
+{
+  int iVar1;
+  char cVar3;
+  String pSVar2;
+  StringBuilder objectRef;
+  int iVar4;
+  int iVar5;
+  StringBuilder objectRef_00;
+  
+  objectRef = new StringBuilder();
+  iVar4 = 0;
+  while( true ) {
+    iVar5 = iVar4;
+    iVar1 = param1.length();
+    if (iVar1 <= iVar5) break;
+    objectRef_00 = objectRef;
+    cVar3 = param1.charAt(iVar4);
+    objectRef_00.append(cVar3 + '\ux0001');
+    iVar4 = iVar4 + 1;
+  }
+  pSVar2 = objectRef.toString();
+  return pSVar2;
+}
+
+```
 
 ## Zadanie 3
