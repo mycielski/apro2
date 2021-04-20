@@ -57,7 +57,7 @@ public class com.company.z1.ConcatenatorStringBuilder {
 
 Z powyższego wywnioskować można niewiele. Wiemy, że obydwa programy mają podobną strukturę — jest w nich tylko metoda `main(String[])`.
 
-Program `javap` daje nam jednak do dyspozycji jeszcze opcję Disassemble the code, oznaczoną `-c`. Po wywołaniu komendy `javap -c` możemy dowiedzieć się o wiele więcej o programie:
+Program `javap` daje nam jednak do dyspozycji jeszcze opcję Disassemble the code, oznaczoną `-c`. Po wywołaniu komendy `javap -c` na tych samych plikach możemy dowiedzieć się o wiele więcej o programie:
 - `ConcatenatorPlusEquals`
 ```text
 Compiled from "ConcatenatorPlusEquals.java"
@@ -114,10 +114,12 @@ public class com.company.z1.ConcatenatorStringBuilder {
       34: return
 }
 ```
-Otrzymaliśmy kod bajtowy Javy. Korzystając z jego dokumentacji dostępnej na [stronie](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html#jvms-6.5.aload_n) Oracle, możemy sporo dowiedzieć się o programie. Jednak już na pierwszy rzut oka widać, w której wersji programu wykorzystany został `StringBuilder`, a w której `+` do konkatenacji dwóch stringów. 
+Otrzymaliśmy kod bajtowy Javy. Korzystając z jego dokumentacji dostępnej na [stronie](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html) Oracle, możemy sporo dowiedzieć się o programie. Jednak już na pierwszy rzut oka widać, w której wersji programu wykorzystany został `StringBuilder`, a w której `+` do konkatenacji dwóch stringów. 
 
-Moją szczególną uwagę zwrócił fakt, że w przypadku programu korzystającego z `StringBuilder` możemy odczytać obydwa ciągi znaków, które ze sobą konkatenujemy, a w programie korzystającym z `+=` tylko drugi z nich.
+Moją szczególną uwagę zwrócił fakt, że w przypadku programu korzystającego ze `StringBuilder` możemy odczytać obydwa ciągi znaków, które ze sobą konkatenujemy, a w programie korzystającym z `+=` tylko drugi z nich.
 
+Pliki `.class`, które podawałem do `javap` dostępne są w folderze (./out/production/lab5/com/company/z1/).
 ## Zadanie 2
+
 
 ## Zadanie 3
