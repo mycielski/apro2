@@ -14,44 +14,44 @@ public class Main {
    public static void main(java.lang.String[])  */
 
     public static void main(String[] param1) {
-        PrintStream pPVar1;
-        String[] ppvVar2;
-        Instant pIVar3;
-        Date pDVar4;
-        String pSVar5;
-        int iVar6;
-        int iVar7;
-        boolean bVar8;
-        SimpleDateFormat objectRef;
-        String objectRef_00;
+        PrintStream printStream;
+        String[] strings;
+        Instant instant;
+        Date date;
+        String s;
+        int i;
+        int i1;
+        boolean b;
+        SimpleDateFormat simpleDateFormat;
+        String s1;
 
         if (param1.length != 1) {
-            pPVar1 = System.out;
-            pPVar1.println("Wrong password!");
+            printStream = System.out;
+            printStream.println("Wrong password!");
             return;
         }
-        ppvVar2 = param1[0].split("_");
-        pIVar3 = Instant.now();
-        pDVar4 = Date.from(pIVar3);
-        objectRef = new SimpleDateFormat("MM");
-        pSVar5 = objectRef.format(pDVar4);
-        iVar6 = Integer.parseInt(pSVar5);
-        iVar7 = ppvVar2[0].length();
-        if ((iVar7 == 7) && (iVar7 = ppvVar2[1].length(),iVar7 == 2)){
-            objectRef_00 = ppvVar2[0];
-            pSVar5 = Coder.code("00PYe8m");
-            bVar8 = objectRef_00.equals(pSVar5);
-            if ((bVar8) && (iVar7 = Integer.parseInt(ppvVar2[1]),iVar7 == iVar6)){
-                pPVar1 = System.out;
-                pPVar1.println("Good guess");
+        strings = param1[0].split("_");
+        instant = Instant.now();
+        date = Date.from(instant);
+        simpleDateFormat = new SimpleDateFormat("MM");
+        s = simpleDateFormat.format(date);
+        i = Integer.parseInt(s);
+        i1 = strings[0].length();
+        if ((i1 == 7) && (i1 = strings[1].length(),i1 == 2)){
+            s1 = strings[0];
+            s = Coder.code("00PYe8m");
+            b = s1.equals(s);
+            if ((b) && (i1 = Integer.parseInt(strings[1]),i1 == i)){
+                printStream = System.out;
+                printStream.println("Good guess");
                 return;
             }
-            pPVar1 = System.out;
-            pPVar1.println("Wrong password!");
+            printStream = System.out;
+            printStream.println("Wrong password!");
             return;
         }
-        pPVar1 = System.out;
-        pPVar1.println("Wrong password!");
+        printStream = System.out;
+        printStream.println("Wrong password!");
         return;
     }
 }

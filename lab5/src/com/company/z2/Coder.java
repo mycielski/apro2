@@ -12,26 +12,26 @@ public class Coder {
     }
 
     public static String code(String param1) {
-        int iVar1;
-        char cVar3;
-        String pSVar2;
-        StringBuilder objectRef;
-        int iVar4;
-        int iVar5;
-        StringBuilder objectRef_00;
+        int i;
+        char c;
+        String s;
+        StringBuilder stringBuilder;
+        int i1;
+        int i2;
+        StringBuilder stringBuilder1;
 
-        objectRef = new StringBuilder();
-        iVar4 = 0;
+        stringBuilder = new StringBuilder();
+        i1 = 0;
         while (true) {
-            iVar5 = iVar4;
-            iVar1 = param1.length();
-            if (iVar1 <= iVar5) break;
-            objectRef_00 = objectRef;
-            cVar3 = param1.charAt(iVar4);
-            objectRef_00.append(cVar3 + '\1');
-            iVar4 = iVar4 + 1;
+            i2 = i1;
+            i = param1.length();
+            if (i <= i2) break;
+            stringBuilder1 = stringBuilder;
+            c = param1.charAt(i1);
+            stringBuilder1.append(c + '\1');
+            i1 = i1 + 1;
         }
-        pSVar2 = objectRef.toString();
-        return pSVar2;
+        s = stringBuilder.toString();
+        return s;
     }
 }
