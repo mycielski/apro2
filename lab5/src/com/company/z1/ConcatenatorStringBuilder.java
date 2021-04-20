@@ -6,6 +6,8 @@ public class ConcatenatorStringBuilder {
         stringBuilder = new StringBuilder();
         stringBuilder.append("String1");
         stringBuilder.append("String2");
-        System.out.println(stringBuilder);
+        String string;
+        string = stringBuilder.toString();
+        System.out.println(string);
     }
 }
