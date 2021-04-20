@@ -1,0 +1,5 @@
+Compiled from "ConcatenatorStringBuilder.java"
+public class com.company.z1.ConcatenatorStringBuilder {
+  public com.company.z1.ConcatenatorStringBuilder();
+  public static void main(java.lang.String[]);
+}

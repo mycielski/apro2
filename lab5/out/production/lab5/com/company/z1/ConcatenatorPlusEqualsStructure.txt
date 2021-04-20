@@ -1,0 +1,5 @@
+Compiled from "ConcatenatorPlusEquals.java"
+public class com.company.z1.ConcatenatorPlusEquals {
+  public com.company.z1.ConcatenatorPlusEquals();
+  public static void main(java.lang.String[]);
+}
