@@ -14,16 +14,16 @@ public class Main {
    public static void main(java.lang.String[])  */
 
     public static void main(String[] param1) {
-        PrintStream printStream;
-        String[] strings;
-        Instant instant;
-        Date date;
-        String s;
         int i;
         int i1;
         boolean b;
-        SimpleDateFormat simpleDateFormat;
+        String s;
         String s1;
+        String[] strings;
+        PrintStream printStream;
+        Instant instant;
+        Date date;
+        SimpleDateFormat simpleDateFormat;
 
         if (param1.length != 1) {
             printStream = System.out;

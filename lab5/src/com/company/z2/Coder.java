@@ -7,17 +7,17 @@ public class Coder {
 
    static String code(java.lang.String)  */
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println(code("00PYe8m")); // 4949819010257110
     }
 
     public static String code(String param1) {
-        int i;
         char c;
-        String s;
-        StringBuilder stringBuilder;
+        int i;
         int i1;
         int i2;
+        String s;
+        StringBuilder stringBuilder;
         StringBuilder stringBuilder1;
 
         stringBuilder = new StringBuilder();
