@@ -118,7 +118,7 @@ Otrzymaliśmy kod bajtowy Javy. Korzystając z jego dokumentacji dostępnej na [
 
 Moją szczególną uwagę zwrócił fakt, że w przypadku programu korzystającego ze `StringBuilder` możemy odczytać obydwa ciągi znaków, które ze sobą konkatenujemy, a w programie korzystającym z `+=` tylko drugi z nich.
 
-Pliki `.class`, które podawałem do `javap` dostępne są w folderze (./out/production/lab5/com/company/z1/).
+Pliki `.class`, które podawałem do `javap` dostępne są w [folderze](./out/production/lab5/com/company/z1/).
 ## Zadanie 2
 
 
