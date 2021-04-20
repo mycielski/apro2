@@ -121,6 +121,14 @@ Moją szczególną uwagę zwrócił fakt, że w przypadku programu korzystające
 Pliki `.class`, które podawałem do `javap` dostępne są w [lab5/out/production/lab5/com/company/z1/](./out/production/lab5/com/company/z1/).
 
 ## Zadanie 2
+
+Zanim przystąpiłem do głębszej analizy danego pliku, próbowałem zgadnąć hasło:
+```text
+java -jar ./Tomasz_Jerzy_Mycielski_task_2.jar password
+Wrong password!
+```
+Po sprawdzeniu tego trywialnego rozwiązania przystąpiłem do inżynierii wstecznej.
+
 Do wykonania tego zadania wykorzystałem program Ghidra. Po zaimportowaniu danego pliku do Ghidry dowiedziałem się, że program składa się z klas - `Coder` i `Main`. Następnie otworzyłem obydwie klasy w narzędziu CodeBrowser po wykonaniu wszystkich dostępnych w nim automatycznych analiz. Dzięki temu uzyskłem poniższy kod:
 - `Main.class`:
 ```java
@@ -207,7 +215,8 @@ String code_java.lang.String_java.lang.String(void param1)
   pSVar2 = objectRef.toString();
   return pSVar2;
 }
-
 ```
+
+Mając do dyspozycji powyższy kod, postarałem się odwzorować program w swoim IDE.
 
 ## Zadanie 3
