@@ -173,7 +173,7 @@ public class Coder
 
 Mając do dyspozycji powyższy kod, postarałem się odwzorować [program](lab5/src/com/company/z2) w swoim IDE. Po analizie kodu ustaliłem, że hasło ma strukturę `[7 znaków] podkreślnik [2 znaki]`. Siedem pierwszych znaków to output metody `Coder.code("00PYe8m")`, a dwa ostatnie znaki to numer obecnego miesiąca.
 
-Sprawdzam hasło:
+Sprawdzam [hasło](lab5/password.txt):
 ```text
 $ java -jar ./Tomasz_Jerzy_Mycielski_task_2.jar 11QZf9n_04
 Good guess
