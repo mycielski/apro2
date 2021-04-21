@@ -1,57 +1,28 @@
 package com.company.z2;
 
-import java.io.PrintStream;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.util.Date;
+import java.time.Instant;
+import java.text.SimpleDateFormat;
 
-public class Main {
-
-    /* Flags:
-     ACC_PUBLIC
-     ACC_STATIC
-
-   public static void main(java.lang.String[])  */
-
-    public static void main(String[] param1) {
-        int i;
-        int i1;
-        boolean b;
-        String s;
-        String s1;
-        String[] strings;
-        PrintStream printStream;
-        Instant instant;
-        Date date;
-        SimpleDateFormat simpleDateFormat;
-
-        if (param1.length != 1) {
-            printStream = System.out;
-            printStream.println("Wrong password!");
+public class Main
+{
+    public static void main(final String[] array) {
+        if (array.length != 1) {
+            System.out.println("Wrong password!");
             return;
         }
-        strings = param1[0].split("_");
-        instant = Instant.now();
-        date = Date.from(instant);
-        simpleDateFormat = new SimpleDateFormat("MM");
-        s = simpleDateFormat.format(date);
-        i = Integer.parseInt(s);
-        i1 = strings[0].length();
-        if ((i1 == 7) && (i1 = strings[1].length(),i1 == 2)){
-            s1 = strings[0];
-            s = Coder.code("00PYe8m");
-            b = s1.equals(s);
-            if ((b) && (i1 = Integer.parseInt(strings[1]),i1 == i)){
-                printStream = System.out;
-                printStream.println("Good guess");
-                return;
+        final String[] split = array[0].split("_");
+        final int int1 = Integer.parseInt(new SimpleDateFormat("MM").format(Date.from(Instant.now())));
+        if (split[0].length() == 7 && split[1].length() == 2) {
+            if (split[0].equals(Coder.code("00PYe8m")) && Integer.parseInt(split[1]) == int1) {
+                System.out.println("Good guess");
             }
-            printStream = System.out;
-            printStream.println("Wrong password!");
-            return;
+            else {
+                System.out.println("Wrong password!");
+            }
         }
-        printStream = System.out;
-        printStream.println("Wrong password!");
-        return;
+        else {
+            System.out.println("Wrong password!");
+        }
     }
 }

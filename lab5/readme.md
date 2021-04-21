@@ -122,101 +122,61 @@ Pliki `.class`, które podawałem do `javap` dostępne są w [lab5/out/productio
 
 ## Zadanie 2
 
-Zanim przystąpiłem do głębszej analizy danego pliku, próbowałem zgadnąć hasło:
-```text
-java -jar ./Tomasz_Jerzy_Mycielski_task_2.jar password
-Wrong password!
-```
-Po sprawdzeniu tego trywialnego rozwiązania przystąpiłem do inżynierii wstecznej.
-
-Do wykonania tego zadania wykorzystałem program Ghidra. Po zaimportowaniu danego pliku do Ghidry dowiedziałem się, że program składa się z klas - `Coder` i `Main`. Następnie otworzyłem obydwie klasy w narzędziu CodeBrowser po wykonaniu wszystkich dostępnych w nim automatycznych analiz. Dzięki temu uzyskłem poniższy kod:
+Do wykonania tego zadania wykorzystałem narzędzie `Procyon` na stronie [javadecompilers.com](javadecompilers.com). Po wysłaniu danego pliku na stronę dowiedziałem się, że program składa się z klas - `Coder` i `Main`:
 - `Main.class`:
 ```java
-/* Flags:
-     ACC_PUBLIC
-     ACC_STATIC
-   
-   public static void main(java.lang.String[])  */
+package com.company;
 
-void main_java.lang.String[]_void(void[] param1)
+import java.util.Date;
+import java.time.Instant;
+import java.text.SimpleDateFormat;
 
+public class Main
 {
-  PrintStream pPVar1;
-  void[] ppvVar2;
-  Instant pIVar3;
-  Date pDVar4;
-  String pSVar5;
-  int iVar6;
-  int iVar7;
-  boolean bVar8;
-  SimpleDateFormat objectRef;
-  void objectRef_00;
-  
-  if (param1.length != 1) {
-    pPVar1 = System.out;
-    pPVar1.println("Wrong password!");
-    return;
-  }
-  ppvVar2 = param1[0].split("_");
-  pIVar3 = Instant.now();
-  pDVar4 = Date.from(pIVar3);
-  objectRef = new SimpleDateFormat("MM");
-  pSVar5 = objectRef.format(pDVar4);
-  iVar6 = Integer.parseInt(pSVar5);
-  iVar7 = ppvVar2[0].length();
-  if ((iVar7 == 7) && (iVar7 = ppvVar2[1].length(), iVar7 == 2)) {
-    objectRef_00 = ppvVar2[0];
-    pSVar5 = Coder.code("00PYe8m");
-    bVar8 = objectRef_00.equals(pSVar5);
-    if ((bVar8 != false) && (iVar7 = Integer.parseInt(ppvVar2[1]), iVar7 == iVar6)) {
-      pPVar1 = System.out;
-      pPVar1.println("Good guess");
-      return;
+    public static void main(final String[] array) {
+        if (array.length != 1) {
+            System.out.println("Wrong password!");
+            return;
+        }
+        final String[] split = array[0].split("_");
+        final int int1 = Integer.parseInt(new SimpleDateFormat("MM").format(Date.from(Instant.now())));
+        if (split[0].length() == 7 && split[1].length() == 2) {
+            if (split[0].equals(Coder.code("00PYe8m")) && Integer.parseInt(split[1]) == int1) {
+                System.out.println("Good guess");
+            }
+            else {
+                System.out.println("Wrong password!");
+            }
+        }
+        else {
+            System.out.println("Wrong password!");
+        }
     }
-    pPVar1 = System.out;
-    pPVar1.println("Wrong password!");
-    return;
-  }
-  pPVar1 = System.out;
-  pPVar1.println("Wrong password!");
-  return;
 }
 ```
 
 - `Coder.class`:
 ```java
-/* Flags:
-     ACC_STATIC
-   
-   static String code(java.lang.String)  */
+package com.company;
 
-String code_java.lang.String_java.lang.String(void param1)
-
+public class Coder
 {
-  int iVar1;
-  char cVar3;
-  String pSVar2;
-  StringBuilder objectRef;
-  int iVar4;
-  int iVar5;
-  StringBuilder objectRef_00;
-  
-  objectRef = new StringBuilder();
-  iVar4 = 0;
-  while( true ) {
-    iVar5 = iVar4;
-    iVar1 = param1.length();
-    if (iVar1 <= iVar5) break;
-    objectRef_00 = objectRef;
-    cVar3 = param1.charAt(iVar4);
-    objectRef_00.append(cVar3 + '\ux0001');
-    iVar4 = iVar4 + 1;
-  }
-  pSVar2 = objectRef.toString();
-  return pSVar2;
+    static String code(final String s) {
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); ++i) {
+            sb.append((char)(s.charAt(i) + '\u0001'));
+        }
+        return sb.toString();
+    }
 }
 ```
 
-Mając do dyspozycji powyższy kod, postarałem się odwzorować program w swoim IDE.
+Mając do dyspozycji powyższy kod, postarałem się odwzorować program w swoim IDE. Po analizie kodu ustaliłem, że hasło ma strukturę `[7 znaków] podkreślnik [2 znaki]`. Siedem pierwszych znaków to output metody `Coder.code("00PYe8m")`, a dwa ostatnie znaki to numer obecnego miesiąca.
+
+Sprawdzam hasło:
+```text
+$ java -jar ./Tomasz_Jerzy_Mycielski_task_2.jar 11QZf9n_04
+Good guess
+```
 
 ## Zadanie 3
