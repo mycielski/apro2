@@ -1,11 +1,10 @@
 package com.company.z2;
 
-import java.util.Date;
-import java.time.Instant;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.Date;
 
-public class Main
-{
+public class Main {
     public static void main(final String[] array) {
         if (array.length != 1) {
             System.out.println("Wrong password!");
@@ -16,12 +15,10 @@ public class Main
         if (split[0].length() == 7 && split[1].length() == 2) {
             if (split[0].equals(Coder.code("00PYe8m")) && Integer.parseInt(split[1]) == int1) {
                 System.out.println("Good guess");
-            }
-            else {
+            } else {
                 System.out.println("Wrong password!");
             }
-        }
-        else {
+        } else {
             System.out.println("Wrong password!");
         }
     }
