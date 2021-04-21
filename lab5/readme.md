@@ -171,7 +171,7 @@ public class Coder
 }
 ```
 
-Mając do dyspozycji powyższy kod, postarałem się odwzorować [program](./com/company/z2) w swoim IDE. Po analizie kodu ustaliłem, że hasło ma strukturę `[7 znaków] podkreślnik [2 znaki]`. Siedem pierwszych znaków to output metody `Coder.code("00PYe8m")`, a dwa ostatnie znaki to numer obecnego miesiąca.
+Mając do dyspozycji powyższy kod, postarałem się odwzorować [program](lab5/com/company/z2) w swoim IDE. Po analizie kodu ustaliłem, że hasło ma strukturę `[7 znaków] podkreślnik [2 znaki]`. Siedem pierwszych znaków to output metody `Coder.code("00PYe8m")`, a dwa ostatnie znaki to numer obecnego miesiąca.
 
 Sprawdzam hasło:
 ```text
