@@ -289,3 +289,10 @@ private static String key = "Kjf456UjOP14Ywte";
 
 Kod ten, po wprowadzeniu komentarzy (będących wynikiem analizy statycznej) wyjaśniających jego działanie, dostępny jest w katalogu [z3](lab5/src/com/company/z3/com/crack/it/).
 
+Po dokonaniu drobnych zmian w kodzie i uruchomieniu go na maszynie wirtualnej (guest OS Ubuntu) dowiedziałem się, że:
+- program sprawdza na jakim systemie jest uruchomiony (Windows lub Linux) w celu dostosowania komend, jakie będą na komputerze ofiary wykonywane
+- program pobiera [zip bombę](https://www.bamsoftware.com/hacks/zipbomb/zbsm.zip)
+- program wypakowuje ją a następnie wyłącza komputer
+
+Program może "zapchać" dysk ofiary po wypakowaniu zip bomby, jednak jest to mało prawdopodobne, gdyż po odpakowaniu bomba waży "jedynie" 5,5GB.
+
