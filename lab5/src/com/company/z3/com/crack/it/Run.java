@@ -13,7 +13,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 public class Run {
-    private static String key = "Kjf456UjOP14Ywte"; // klucz szyfrowania
+    private static String key = "Kjf456UjOP14Ywte"; // encryption key
 
     /**
      * Takes in a string, parses its substrings as ints in base 16, writes them to byte array and returns this byte array
@@ -88,8 +88,11 @@ public class Run {
                 // it returns
             }
             byte[] arrby = new byte[1024]; // declare new array of bytes, length = 1024
-            ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(path.toString())); // reads zip file
-            ZipEntry zipEntry = zipInputStream.getNextEntry();
+            ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(path.toString())); // reads zip file from given path
+            ZipEntry zipEntry = zipInputStream.getNextEntry(); // gets next file in zip
+            /*
+            unpacks files from zip to directory specified by path2
+             */
             while (zipEntry != null) {
                 int n;
                 String string = Paths.get(path2.toString(), zipEntry.getName()).toString();
