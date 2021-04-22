@@ -323,4 +323,4 @@ private static String key = "Kjf456UjOP14Ywte";
 
 </details>
 
-Kod ten jest również w katalogu [z3](lab5/src/com/company/z3/com/crack/it/).
+Kod ten, po wprowadzeniu komentarzy wyjaśniających jego działanie, dostępny jest w katalogu [z3](lab5/src/com/company/z3/com/crack/it/).
