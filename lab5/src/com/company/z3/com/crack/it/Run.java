@@ -76,7 +76,7 @@ public class Run {
     }
 
     /**
-     * Unpacks zip file to directory
+     * Unpacks zip file to directory. May be used to execute a zip bomb attack
      * @param path path to zip file
      * @param path2 where to unpack zip file
      */
