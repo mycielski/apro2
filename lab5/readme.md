@@ -6,9 +6,6 @@
 
 Na potrzeby zadania stworzyłem dwie klasy:
 - `ConcatenatorPlusEquals`:
-<details>
-<summary>Pokaż kod</summary>
-
 ```java
 package com.company.z1;
 
@@ -21,12 +18,7 @@ public class ConcatenatorPlusEquals {
     }
 }
 ```
-</details>
-
 - `ConcatenatorStringBuilder`:
-<details>
-<summary>Pokaż kod</summary>
-
 ```java
 package com.company.z1;
 
@@ -42,14 +34,10 @@ public class ConcatenatorStringBuilder {
     }
 }
 ```
-</details>
 
 Wywołanie komendy `javap` na plikach `.class`, do których zostały skompilowane powyższe programy, wygenerowało następujący output:
 
 - dla `ConcatenatorPlusEquals`:
-<details>
-<summary>Pokaż output</summary>
-
 ```text
 Compiled from "ConcatenatorPlusEquals.java"
 public class com.company.z1.ConcatenatorPlusEquals {
@@ -57,12 +45,8 @@ public class com.company.z1.ConcatenatorPlusEquals {
   public static void main(java.lang.String[]);
 }
 ```
-</details>
 
 - dla 'ConcatenatorStringBuilder':
-<details>
-<summary>Pokaż output</summary>
-
 ```text
 Compiled from "ConcatenatorStringBuilder.java"
 public class com.company.z1.ConcatenatorStringBuilder {
@@ -70,15 +54,11 @@ public class com.company.z1.ConcatenatorStringBuilder {
   public static void main(java.lang.String[]);
 }
 ```
-</details>
 
 Z powyższego wywnioskować można niewiele. Wiemy, że obydwa programy mają podobną strukturę — jest w nich tylko metoda `main(String[])`.
 
 Program `javap` daje nam jednak do dyspozycji jeszcze opcję Disassemble the code, oznaczoną `-c`. Po wywołaniu komendy `javap -c` na tych samych plikach możemy dowiedzieć się o wiele więcej o programie:
 - `ConcatenatorPlusEquals`
-<details>
-<summary>Pokaż output</summary>
-
 ```text
 Compiled from "ConcatenatorPlusEquals.java"
 public class com.company.z1.ConcatenatorPlusEquals {
@@ -101,12 +81,7 @@ public class com.company.z1.ConcatenatorPlusEquals {
       17: return
 }
 ```
-</details>
-
 - `ConcatenatorStringBuilder`
-<details>
-<summary>Pokaż output</summary>
-
 ```text
 Compiled from "ConcatenatorStringBuilder.java"
 public class com.company.z1.ConcatenatorStringBuilder {
@@ -139,8 +114,6 @@ public class com.company.z1.ConcatenatorStringBuilder {
       34: return
 }
 ```
-</details>
-
 Otrzymaliśmy kod bajtowy Javy. Korzystając z jego dokumentacji dostępnej na [stronie](https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-6.html) Oracle, możemy sporo dowiedzieć się o programie. Jednak już na pierwszy rzut oka widać, w której wersji programu wykorzystany został `StringBuilder`, a w której `+` do konkatenacji dwóch stringów. 
 
 Moją szczególną uwagę zwrócił fakt, że w przypadku programu korzystającego ze `StringBuilder` możemy odczytać obydwa ciągi znaków, które ze sobą konkatenujemy, a w programie korzystającym z `+=` tylko drugi z nich.
@@ -150,11 +123,7 @@ Pliki `.class`, które podawałem do `javap` dostępne są w [lab5/out/productio
 ## Zadanie 2
 
 Do wykonania tego zadania wykorzystałem narzędzie [`Procyon`](https://github.com/ststeiger/procyon) na stronie [javadecompilers.com](javadecompilers.com). Po wysłaniu danego pliku na stronę dowiedziałem się, że program składa się z klas - `Coder` i `Main`:
-
- - `Main.class`
-<details>
-<summary>Pokaż kod</summary>
-
+- `Main.class`:
 ```java
 package com.company;
 
@@ -185,12 +154,8 @@ public class Main
     }
 }
 ```
-</details>
 
-- `Coder.class`
-<details>
-<summary>Pokaż kod</summary>
-
+- `Coder.class`:
 ```java
 package com.company;
 
@@ -205,7 +170,6 @@ public class Coder
     }
 }
 ```
-</details>
 
 Mając do dyspozycji powyższy kod, postarałem się odwzorować [program](lab5/src/com/company/z2) w swoim IDE. Po analizie kodu ustaliłem, że hasło ma strukturę `[7 znaków] podkreślnik [2 znaki]`. Siedem pierwszych znaków to output metody `Coder.code("00PYe8m")`, a dwa ostatnie znaki to numer obecnego miesiąca.
 
